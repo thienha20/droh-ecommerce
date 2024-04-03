@@ -1,11 +1,6 @@
 /tmp/*
 !/tmp/.gitkeep
 .idea
-/var/cache/*
-/var/files/*
-/var/snapshots/*
-/images/*
-/upload/*
 *.bak
 *.DS_Store*
 *.sublime*
