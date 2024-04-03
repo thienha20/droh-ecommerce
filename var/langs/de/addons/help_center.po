@@ -1,0 +1,30 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: cs-cart-latest\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: German\n"
+"Language: de_DE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: cs-cart-latest\n"
+"X-Crowdin-Project-ID: 50163\n"
+"X-Crowdin-Language: de\n"
+"X-Crowdin-File: /release-4.14.3/addons/help_center.po\n"
+"X-Crowdin-File-ID: 6342\n"
+"PO-Revision-Date: 2022-04-13 14:58\n"
+
+msgctxt "Addons::name::help_center"
+msgid "Help center"
+msgstr "Hilfezentrum"
+
+msgctxt "Addons::description::help_center"
+msgid "Adds a help button with links to relevant documentation and/or videos to various pages in the admin panel."
+msgstr "Fügt eine Hilfe-Schaltfläche mit Links zu relevanter Dokumentation und/oder Videos zu verschiedenen Seiten im Admin-Bereich hinzu."
+
+msgctxt "Languages::help_center.help"
+msgid "Help"
+msgstr "Hilfe"
+
+msgctxt "Languages::help_center.see_all_n_results"
+msgid "See all [n] results..."
+msgstr "Alle [n] Ergebnisse anzeigen..."
+

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<addon scheme="3.0">
+    <id>droh_common</id>
+    <version>1.0</version>
+    <name>Addon DrOH</name>
+    <supplier>DR.OH team</supplier>
+    <description>Support common logic for website</description>
+    <priority>100500</priority>
+</addon>

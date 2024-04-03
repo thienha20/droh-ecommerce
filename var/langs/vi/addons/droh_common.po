@@ -1,0 +1,29 @@
+msgid ""
+msgstr "Project-Id-Version: tygh\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: Việt Nam\n"
+"Language: vi_VN"
+
+msgctxt "Addons::name::droh_common"
+msgid "Dr.OH Common"
+msgstr "Dr.Oh Addon"
+
+msgctxt "Addons::description::droh_common"
+msgid "Addon Dr.Oh support website"
+msgstr "Addon Dr.Oh hỗ trợ các tính năng cho website"
+
+msgctxt "Languages::district"
+msgid "district"
+msgstr "Quận/huyện"
+
+msgctxt "Languages::add_district"
+msgid "Add district"
+msgstr "Thêm quận/huyện"
+
+msgctxt "Languages::ward"
+msgid "ward"
+msgstr "Phường/xã"
+
+msgctxt "Languages::add_ward"
+msgid "Add ward"
+msgstr "Thêm phường/xã"

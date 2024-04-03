@@ -1,0 +1,30 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: cs-cart-latest\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: Chinese Simplified\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: cs-cart-latest\n"
+"X-Crowdin-Project-ID: 50163\n"
+"X-Crowdin-Language: zh-CN\n"
+"X-Crowdin-File: /release-4.14.3/addons/help_center.po\n"
+"X-Crowdin-File-ID: 6342\n"
+"PO-Revision-Date: 2022-04-13 14:57\n"
+
+msgctxt "Addons::name::help_center"
+msgid "Help center"
+msgstr "帮助中心"
+
+msgctxt "Addons::description::help_center"
+msgid "Adds a help button with links to relevant documentation and/or videos to various pages in the admin panel."
+msgstr "在管理面板的各个页面中添加一个帮助按钮，其中包含指向相关文档和/或视频的链接。"
+
+msgctxt "Languages::help_center.help"
+msgid "Help"
+msgstr "帮助"
+
+msgctxt "Languages::help_center.see_all_n_results"
+msgid "See all [n] results..."
+msgstr "查看所有 [n] 个结果..."
+

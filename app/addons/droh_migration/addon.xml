@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<addon scheme="3.0">
+    <id>droh_migration</id>
+    <version>1.0</version>
+    <name>DR.OH Migration</name>
+    <supplier>DR.OH team</supplier>
+    <description>Migrate Database</description>
+    <priority>100000</priority>
+    <settings>
+        <sections>
+            <section id="general">
+                <items>
+                    <item id="info">
+                        <type>info</type>
+                        <handler>fn_droh_migration_get_info</handler>
+                    </item>
+                </items>
+            </section>
+        </sections>
+    </settings>
+    <queries>
+        <item>
+            CREATE TABLE `?:droh_migrations` (
+                `migrate_id` int(10) unsigned NOT NULL auto_increment,
+                `name` varchar(100) NOT NULL default '',
+                `started_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+                `finished_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+                `rolled_at` DATETIME(3) NULL DEFAULT NULL,
+                PRIMARY KEY  (`migrate_id`),
+                INDEX `name` (`name`)
+            ) DEFAULT CHARSET UTF8;
+        </item>
+    </queries>
+</addon>

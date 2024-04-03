@@ -1,0 +1,30 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: cs-cart-latest\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: Korean\n"
+"Language: ko_KR\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: cs-cart-latest\n"
+"X-Crowdin-Project-ID: 50163\n"
+"X-Crowdin-Language: ko\n"
+"X-Crowdin-File: /release-4.14.3/addons/help_center.po\n"
+"X-Crowdin-File-ID: 6342\n"
+"PO-Revision-Date: 2022-04-13 14:58\n"
+
+msgctxt "Addons::name::help_center"
+msgid "Help center"
+msgstr "지원 센터"
+
+msgctxt "Addons::description::help_center"
+msgid "Adds a help button with links to relevant documentation and/or videos to various pages in the admin panel."
+msgstr "관리자 패널의 다양한 페이지에 대한 관련 문서 및/또는 비디오에 대한 링크가 있는 도움말 버튼을 추가합니다."
+
+msgctxt "Languages::help_center.help"
+msgid "Help"
+msgstr "돕다"
+
+msgctxt "Languages::help_center.see_all_n_results"
+msgid "See all [n] results..."
+msgstr "[n] 개의 결과 모두 보기..."
+
