@@ -1,5 +1,5 @@
 <?php $snapshot = array (
-  'time' => 1711959063,
+  'time' => 1712113373,
   'files' => 
   array (
     '12a5350b4ec83ef86b6951b308a4cb00' => '/api.php',
@@ -8,7 +8,6 @@
     'a4c5f9b6d535ab1872ed630aa0838a7c' => '/index.php',
     '9dbc68fba1deda7acc0733dedca482fa' => '/init.php',
     '0da91484f2e5716bdee157f726a60943' => '/localtion.sql',
-    '9c294c278929f580e5c12815c4c595c1' => '/php_redis-5.3.3-7.4-ts-vc15-x64.zip',
     'fe2b1fec81bb8f777f92613641453d7b' => '/store_closed.html',
     'bb7cc8d886b67b4f62eebb7c8d6bb917' => '/app/addons/access_restrictions/addon.xml',
     '7f33d6a66cfabed306b1738d62d25ea2' => '/app/addons/access_restrictions/controllers/backend/access_restrictions.php',
