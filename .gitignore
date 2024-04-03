@@ -10,3 +10,7 @@
 nbproject
 Thumbs.db
 robots.txt!/.htaccess
+/var/cache/*
+/var/snapshots/*
+/images/*
+/var/files/*
