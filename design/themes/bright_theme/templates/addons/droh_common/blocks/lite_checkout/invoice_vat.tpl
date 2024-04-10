@@ -3,22 +3,20 @@
         <div class="litecheckout__item" style="width: 100%;">
             <div class="ty-profile-field__switch ty-address-switch clearfix litecheckout__address-switch">
                 <div class="ty-profile-field__switch-label">
-                    <label for="sw_litecheckout_step_billing_address_suffix_no">{__('invoice_vat')}</label></div>
+                    <label for="sw_litecheckout_invoice_vat_selected">{__('invoice_vat')}</label></div>
                 <div class="ty-profile-field__switch-actions">
-                    <input id="sw_litecheckout_step_billing_address_suffix_no" type="checkbox" value="1"
+                    <input id="sw_litecheckout_invoice_vat_selected" type="checkbox" value="1"
                            name="invoice_vat_selected" data-ca-lite-checkout-field="invoice_vat_selected"
                            data-ca-lite-checkout-auto-save-on-change="true"
+                           {if !empty($cart.invoice_vat_selected)}checked{/if}
                            class="checkbox cm-switch-availability cm-switch-visibility">
                 </div>
             </div>
         </div>
     </div>
     <div id="litecheckout_invoice_vat_wrapper">
-        <div class="litecheckout__container" id="litecheckout_invoice_vat_info">
+        <div class="litecheckout__container {if empty($cart.invoice_vat_selected)}hidden{else}{/if}" id="litecheckout_invoice_vat_info">
             <div class="litecheckout__group">
-                <input type="hidden" value="1" name="ship_to_another" data-ca-lite-checkout-field="ship_to_another"
-                       data-ca-lite-checkout-auto-save-on-change="true" class="">
-
                 <div class="litecheckout__field cm-field-container litecheckout__field--small litecheckout__field--input"
                      data-ca-error-message-target-method="append">
                     <input class="litecheckout__input" placeholder=" " id="litecheckout_invoice_vat_company"
@@ -58,3 +56,14 @@
             <!--litecheckout_invoice_vat_info--></div>
         <!--litecheckout_invoice_vat_wrapper--></div>
 </div>
+<script type="application/javascript">
+    $(document).ready(function(){
+        $('#sw_litecheckout_invoice_vat_selected').on('click', function() {
+            if($(this).is(':checked')){
+                $('#litecheckout_invoice_vat_info').removeClass('hidden')
+            } else {
+                $('#litecheckout_invoice_vat_info').addClass('hidden')
+            }
+        });
+    });
+</script>
