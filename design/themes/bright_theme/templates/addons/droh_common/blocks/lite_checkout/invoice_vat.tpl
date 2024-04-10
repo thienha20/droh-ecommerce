@@ -61,8 +61,12 @@
         $('#sw_litecheckout_invoice_vat_selected').on('click', function() {
             if($(this).is(':checked')){
                 $('#litecheckout_invoice_vat_info').removeClass('hidden')
+                $('#litecheckout_invoice_vat_info label').addClass('cm-required')
+                $('#litecheckout_invoice_vat_info label[for=litecheckout_invoice_vat_email]').addClass('cm-email')
             } else {
                 $('#litecheckout_invoice_vat_info').addClass('hidden')
+                $('#litecheckout_invoice_vat_info label').removeClass('cm-required')
+                $('#litecheckout_invoice_vat_info label[for=litecheckout_invoice_vat_email]').removeClass('cm-email')
             }
         });
     });
