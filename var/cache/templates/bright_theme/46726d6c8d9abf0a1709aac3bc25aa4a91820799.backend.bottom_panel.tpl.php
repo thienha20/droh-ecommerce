@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21, created on 2024-03-27 10:16:21
+<?php /* Smarty version Smarty-3.1.21, created on 2024-04-10 15:53:59
          compiled from "C:\wamp64\www\cscart\design\backend\templates\components\bottom_panel\bottom_panel.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:15127614216603c7c587a9e8-79865593%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1346094211661653a717abb1-84206167%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'backend',
     ),
   ),
-  'nocache_hash' => '15127614216603c7c587a9e8-79865593',
+  'nocache_hash' => '1346094211661653a717abb1-84206167',
   'function' => 
   array (
   ),
@@ -38,9 +38,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21',
-  'unifunc' => 'content_6603c7c5e45763_92878236',
+  'unifunc' => 'content_661653a78130f3_58784390',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_6603c7c5e45763_92878236')) {function content_6603c7c5e45763_92878236($_smarty_tpl) {?><?php if (!is_callable('smarty_block_hook')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\block.hook.php';
+<?php if ($_valid && !is_callable('content_661653a78130f3_58784390')) {function content_661653a78130f3_58784390($_smarty_tpl) {?><?php if (!is_callable('smarty_block_hook')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\block.hook.php';
 if (!is_callable('smarty_modifier_enum')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\modifier.enum.php';
 if (!is_callable('smarty_modifier_replace')) include 'C:\\wamp64\\www\\cscart\\app\\lib\\vendor\\smarty\\smarty\\libs\\plugins\\modifier.replace.php';
 if (!is_callable('smarty_function_script')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.script.php';
@@ -218,7 +218,7 @@ echo htmlspecialchars(fn_url('',"A"), ENT_QUOTES, 'UTF-8');
             <?php $_smarty_tpl->tpl_vars['redirect_area'] = new Smarty_variable($_smarty_tpl->tpl_vars['auth']->value['user_type']===smarty_modifier_enum("UserTypes::VENDOR") ? "V" : "A", null, 0);?>
             <a href="<?php ob_start();
 if ($_smarty_tpl->tpl_vars['storefront_id']->value) {?><?php echo "&storefront_id=";?><?php echo (string)$_smarty_tpl->tpl_vars['storefront_id']->value;?><?php }
-$_tmp1=ob_get_clean();?><?php echo htmlspecialchars(fn_url("bottom_panel.redirect?url=".((string)urlencode($_smarty_tpl->tpl_vars['config']->value['current_url']))."&area=".((string)(defined('AREA') ? constant('AREA') : null))."&to_area=C".$_tmp1,$_smarty_tpl->tpl_vars['redirect_area']->value), ENT_QUOTES, 'UTF-8');?>
+$_tmp2=ob_get_clean();?><?php echo htmlspecialchars(fn_url("bottom_panel.redirect?url=".((string)urlencode($_smarty_tpl->tpl_vars['config']->value['current_url']))."&area=".((string)(defined('AREA') ? constant('AREA') : null))."&to_area=C".$_tmp2,$_smarty_tpl->tpl_vars['redirect_area']->value), ENT_QUOTES, 'UTF-8');?>
 "
                 class="bp-nav__item cm-no-ajax
                 <?php if ((defined('ACCOUNT_TYPE') ? constant('ACCOUNT_TYPE') : null)==="customer") {?>
@@ -263,17 +263,17 @@ $_tmp1=ob_get_clean();?><?php echo htmlspecialchars(fn_url("bottom_panel.redirec
                     <?php if ($_smarty_tpl->tpl_vars['active_mode']->value==="text") {?>
                         href="<?php ob_start();
 echo htmlspecialchars(urlencode($_smarty_tpl->tpl_vars['config']->value['current_url']), ENT_QUOTES, 'UTF-8');
-$_tmp2=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.disable_mode?type=live_editor&return_url=".$_tmp2), ENT_QUOTES, 'UTF-8');?>
+$_tmp3=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.disable_mode?type=live_editor&return_url=".$_tmp3), ENT_QUOTES, 'UTF-8');?>
 "
                     <?php } elseif ($_smarty_tpl->tpl_vars['active_mode']->value==="theme") {?>
                         href="<?php ob_start();
 echo htmlspecialchars(urlencode($_smarty_tpl->tpl_vars['config']->value['current_url']), ENT_QUOTES, 'UTF-8');
-$_tmp3=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.disable_mode?type=theme_editor&return_url=".$_tmp3), ENT_QUOTES, 'UTF-8');?>
+$_tmp4=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.disable_mode?type=theme_editor&return_url=".$_tmp4), ENT_QUOTES, 'UTF-8');?>
 "
                     <?php } elseif ($_smarty_tpl->tpl_vars['active_mode']->value==="build") {?>
                         href="<?php ob_start();
 echo htmlspecialchars(urlencode($_smarty_tpl->tpl_vars['config']->value['current_url']), ENT_QUOTES, 'UTF-8');
-$_tmp4=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.disable_mode?type=block_manager&return_url=".$_tmp4), ENT_QUOTES, 'UTF-8');?>
+$_tmp5=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.disable_mode?type=block_manager&return_url=".$_tmp5), ENT_QUOTES, 'UTF-8');?>
 "
                     <?php } else { ?>
                         href="<?php echo htmlspecialchars(fn_url(''), ENT_QUOTES, 'UTF-8');?>
@@ -290,7 +290,7 @@ $_tmp4=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.disabl
                 <?php if (fn_check_permissions("customization","update_mode","admin",'',array("type"=>"live_editor"),(defined('AREA') ? constant('AREA') : null),$_smarty_tpl->tpl_vars['auth']->value['user_id'])&&$_smarty_tpl->tpl_vars['auth']->value['user_type']===smarty_modifier_enum("UserTypes::ADMIN")) {?>
                     <a href="<?php ob_start();
 echo htmlspecialchars(urlencode($_smarty_tpl->tpl_vars['c_url']->value), ENT_QUOTES, 'UTF-8');
-$_tmp5=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.update_mode?type=live_editor&status=enable&return_url=".$_tmp5), ENT_QUOTES, 'UTF-8');?>
+$_tmp6=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.update_mode?type=live_editor&status=enable&return_url=".$_tmp6), ENT_QUOTES, 'UTF-8');?>
 "
                         id="settings_live_editor"
                         class="cm-no-ajax bp-modes__item bp-modes__item--text
@@ -307,7 +307,7 @@ $_tmp5=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.update
                     <a href=" <?php if (fn_is_theme_editor_available_for_user($_smarty_tpl->tpl_vars['auth']->value)) {
 ob_start();
 echo htmlspecialchars(urlencode($_smarty_tpl->tpl_vars['c_url']->value), ENT_QUOTES, 'UTF-8');
-$_tmp6=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.update_mode?type=theme_editor&status=enable&return_url=".$_tmp6), ENT_QUOTES, 'UTF-8');
+$_tmp7=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.update_mode?type=theme_editor&status=enable&return_url=".$_tmp7), ENT_QUOTES, 'UTF-8');
 } else { ?>#<?php }?>"
                         id="settings_theme_editor"
                         class="cm-no-ajax bp-modes__item bp-modes__item--theme
@@ -333,7 +333,7 @@ $_tmp6=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.update
                     <a href="<?php if ($_smarty_tpl->tpl_vars['location_data']->value['is_frontend_editing_allowed']) {
 ob_start();
 echo htmlspecialchars(urlencode($_smarty_tpl->tpl_vars['c_url']->value), ENT_QUOTES, 'UTF-8');
-$_tmp7=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.update_mode?type=block_manager&status=enable&return_url=".$_tmp7), ENT_QUOTES, 'UTF-8');
+$_tmp8=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.update_mode?type=block_manager&status=enable&return_url=".$_tmp8), ENT_QUOTES, 'UTF-8');
 } else { ?>#<?php }?>"
                        id="settings_block_manager"
                        class="cm-no-ajax bp-modes__item bp-modes__item--build
@@ -636,7 +636,7 @@ echo htmlspecialchars(fn_url('',"A"), ENT_QUOTES, 'UTF-8');
             <?php $_smarty_tpl->tpl_vars['redirect_area'] = new Smarty_variable($_smarty_tpl->tpl_vars['auth']->value['user_type']===smarty_modifier_enum("UserTypes::VENDOR") ? "V" : "A", null, 0);?>
             <a href="<?php ob_start();
 if ($_smarty_tpl->tpl_vars['storefront_id']->value) {?><?php echo "&storefront_id=";?><?php echo (string)$_smarty_tpl->tpl_vars['storefront_id']->value;?><?php }
-$_tmp8=ob_get_clean();?><?php echo htmlspecialchars(fn_url("bottom_panel.redirect?url=".((string)urlencode($_smarty_tpl->tpl_vars['config']->value['current_url']))."&area=".((string)(defined('AREA') ? constant('AREA') : null))."&to_area=C".$_tmp8,$_smarty_tpl->tpl_vars['redirect_area']->value), ENT_QUOTES, 'UTF-8');?>
+$_tmp9=ob_get_clean();?><?php echo htmlspecialchars(fn_url("bottom_panel.redirect?url=".((string)urlencode($_smarty_tpl->tpl_vars['config']->value['current_url']))."&area=".((string)(defined('AREA') ? constant('AREA') : null))."&to_area=C".$_tmp9,$_smarty_tpl->tpl_vars['redirect_area']->value), ENT_QUOTES, 'UTF-8');?>
 "
                 class="bp-nav__item cm-no-ajax
                 <?php if ((defined('ACCOUNT_TYPE') ? constant('ACCOUNT_TYPE') : null)==="customer") {?>
@@ -681,17 +681,17 @@ $_tmp8=ob_get_clean();?><?php echo htmlspecialchars(fn_url("bottom_panel.redirec
                     <?php if ($_smarty_tpl->tpl_vars['active_mode']->value==="text") {?>
                         href="<?php ob_start();
 echo htmlspecialchars(urlencode($_smarty_tpl->tpl_vars['config']->value['current_url']), ENT_QUOTES, 'UTF-8');
-$_tmp9=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.disable_mode?type=live_editor&return_url=".$_tmp9), ENT_QUOTES, 'UTF-8');?>
+$_tmp10=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.disable_mode?type=live_editor&return_url=".$_tmp10), ENT_QUOTES, 'UTF-8');?>
 "
                     <?php } elseif ($_smarty_tpl->tpl_vars['active_mode']->value==="theme") {?>
                         href="<?php ob_start();
 echo htmlspecialchars(urlencode($_smarty_tpl->tpl_vars['config']->value['current_url']), ENT_QUOTES, 'UTF-8');
-$_tmp10=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.disable_mode?type=theme_editor&return_url=".$_tmp10), ENT_QUOTES, 'UTF-8');?>
+$_tmp11=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.disable_mode?type=theme_editor&return_url=".$_tmp11), ENT_QUOTES, 'UTF-8');?>
 "
                     <?php } elseif ($_smarty_tpl->tpl_vars['active_mode']->value==="build") {?>
                         href="<?php ob_start();
 echo htmlspecialchars(urlencode($_smarty_tpl->tpl_vars['config']->value['current_url']), ENT_QUOTES, 'UTF-8');
-$_tmp11=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.disable_mode?type=block_manager&return_url=".$_tmp11), ENT_QUOTES, 'UTF-8');?>
+$_tmp12=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.disable_mode?type=block_manager&return_url=".$_tmp12), ENT_QUOTES, 'UTF-8');?>
 "
                     <?php } else { ?>
                         href="<?php echo htmlspecialchars(fn_url(''), ENT_QUOTES, 'UTF-8');?>
@@ -708,7 +708,7 @@ $_tmp11=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.disab
                 <?php if (fn_check_permissions("customization","update_mode","admin",'',array("type"=>"live_editor"),(defined('AREA') ? constant('AREA') : null),$_smarty_tpl->tpl_vars['auth']->value['user_id'])&&$_smarty_tpl->tpl_vars['auth']->value['user_type']===smarty_modifier_enum("UserTypes::ADMIN")) {?>
                     <a href="<?php ob_start();
 echo htmlspecialchars(urlencode($_smarty_tpl->tpl_vars['c_url']->value), ENT_QUOTES, 'UTF-8');
-$_tmp12=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.update_mode?type=live_editor&status=enable&return_url=".$_tmp12), ENT_QUOTES, 'UTF-8');?>
+$_tmp13=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.update_mode?type=live_editor&status=enable&return_url=".$_tmp13), ENT_QUOTES, 'UTF-8');?>
 "
                         id="settings_live_editor"
                         class="cm-no-ajax bp-modes__item bp-modes__item--text
@@ -725,7 +725,7 @@ $_tmp12=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.updat
                     <a href=" <?php if (fn_is_theme_editor_available_for_user($_smarty_tpl->tpl_vars['auth']->value)) {
 ob_start();
 echo htmlspecialchars(urlencode($_smarty_tpl->tpl_vars['c_url']->value), ENT_QUOTES, 'UTF-8');
-$_tmp13=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.update_mode?type=theme_editor&status=enable&return_url=".$_tmp13), ENT_QUOTES, 'UTF-8');
+$_tmp14=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.update_mode?type=theme_editor&status=enable&return_url=".$_tmp14), ENT_QUOTES, 'UTF-8');
 } else { ?>#<?php }?>"
                         id="settings_theme_editor"
                         class="cm-no-ajax bp-modes__item bp-modes__item--theme
@@ -751,7 +751,7 @@ $_tmp13=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.updat
                     <a href="<?php if ($_smarty_tpl->tpl_vars['location_data']->value['is_frontend_editing_allowed']) {
 ob_start();
 echo htmlspecialchars(urlencode($_smarty_tpl->tpl_vars['c_url']->value), ENT_QUOTES, 'UTF-8');
-$_tmp14=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.update_mode?type=block_manager&status=enable&return_url=".$_tmp14), ENT_QUOTES, 'UTF-8');
+$_tmp15=ob_get_clean();?><?php echo htmlspecialchars(fn_url("customization.update_mode?type=block_manager&status=enable&return_url=".$_tmp15), ENT_QUOTES, 'UTF-8');
 } else { ?>#<?php }?>"
                        id="settings_block_manager"
                        class="cm-no-ajax bp-modes__item bp-modes__item--build

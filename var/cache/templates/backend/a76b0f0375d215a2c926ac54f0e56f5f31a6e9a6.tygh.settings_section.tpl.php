@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21, created on 2024-03-27 10:11:34
+<?php /* Smarty version Smarty-3.1.21, created on 2024-04-10 15:53:44
          compiled from "C:\wamp64\www\cscart\design\backend\templates\common\settings_section.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:7478948416603c6a6d56d88-63149910%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:579055251661653982cf200-23375142%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'tygh',
     ),
   ),
-  'nocache_hash' => '7478948416603c6a6d56d88-63149910',
+  'nocache_hash' => '579055251661653982cf200-23375142',
   'function' => 
   array (
   ),
@@ -30,9 +30,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21',
-  'unifunc' => 'content_6603c6a6dd0030_09009957',
+  'unifunc' => 'content_661653982f9e54_37516356',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_6603c6a6dd0030_09009957')) {function content_6603c6a6dd0030_09009957($_smarty_tpl) {?><?php  $_smarty_tpl->tpl_vars['item'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['item']->_loop = false;
+<?php if ($_valid && !is_callable('content_661653982f9e54_37516356')) {function content_661653982f9e54_37516356($_smarty_tpl) {?><?php  $_smarty_tpl->tpl_vars['item'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['item']->_loop = false;
  $_smarty_tpl->tpl_vars['name'] = new Smarty_Variable;
  $_from = $_smarty_tpl->tpl_vars['items']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
  $_smarty_tpl->tpl_vars['item']->total= $_smarty_tpl->_count($_from);
@@ -51,7 +51,7 @@ $_smarty_tpl->tpl_vars['item']->_loop = true;
         <?php $_smarty_tpl->tpl_vars['is_parent_global'] = new Smarty_variable(isset($_smarty_tpl->tpl_vars['parent_item']->value['global_data'])&&$_smarty_tpl->tpl_vars['parent_item']->value['global_data']['value']!=='', null, 0);?>
         <?php ob_start();
 if (($_smarty_tpl->tpl_vars['is_parent_global']->value)) {?><?php echo (string)$_smarty_tpl->tpl_vars['parent_item']->value['global_data']['name'];?><?php echo "_";?><?php echo (string)$_smarty_tpl->tpl_vars['parent_item']->value['global_data']['object_id'];?><?php } else { ?><?php echo (string)$_smarty_tpl->tpl_vars['parent_item']->value['name'];?><?php echo "_";?><?php echo (string)$_smarty_tpl->tpl_vars['parent_item']->value['object_id'];?><?php }
-$_tmp1=ob_get_clean();?><?php $_smarty_tpl->tpl_vars['parent_item_html_id'] = new Smarty_variable(strtolower(((string)$_smarty_tpl->tpl_vars['html_id_prefix']->value)."_".((string)$_smarty_tpl->tpl_vars['section_name']->value)."_".$_tmp1), null, 0);?>
+$_tmp12=ob_get_clean();?><?php $_smarty_tpl->tpl_vars['parent_item_html_id'] = new Smarty_variable(strtolower(((string)$_smarty_tpl->tpl_vars['html_id_prefix']->value)."_".((string)$_smarty_tpl->tpl_vars['section_name']->value)."_".$_tmp12), null, 0);?>
     <?php }?>
 
     <?php $_smarty_tpl->tpl_vars['input_html_name'] = new Smarty_variable(((string)$_smarty_tpl->tpl_vars['html_name']->value)."[".((string)$_smarty_tpl->tpl_vars['item']->value['object_id'])."]", null, 0);?>

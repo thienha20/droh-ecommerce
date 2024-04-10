@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21, created on 2024-03-27 10:01:10
+<?php /* Smarty version Smarty-3.1.21, created on 2024-04-10 15:53:57
          compiled from "C:\wamp64\www\cscart\design\themes\responsive\templates\addons\gift_certificates\hooks\index\styles.post.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:16114650606603c2c7132b29-81540406%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:293226792661653a5a59235-99760504%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,20 +11,20 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'tygh',
     ),
   ),
-  'nocache_hash' => '16114650606603c2c7132b29-81540406',
+  'nocache_hash' => '293226792661653a5a59235-99760504',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21',
-  'unifunc' => 'content_6603c2c71801b9_38426459',
   'variables' => 
   array (
     'runtime' => 0,
     'auth' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21',
+  'unifunc' => 'content_661653a5a80881_72998908',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_6603c2c71801b9_38426459')) {function content_6603c2c71801b9_38426459($_smarty_tpl) {?><?php if (!is_callable('smarty_function_style')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.style.php';
+<?php if ($_valid && !is_callable('content_661653a5a80881_72998908')) {function content_661653a5a80881_72998908($_smarty_tpl) {?><?php if (!is_callable('smarty_function_style')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.style.php';
 if (!is_callable('smarty_function_set_id')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.set_id.php';
 ?><?php if ($_smarty_tpl->tpl_vars['runtime']->value['customization_mode']['design']=="Y"&&(defined('AREA') ? constant('AREA') : null)=="C") {
 $_smarty_tpl->_capture_stack[0][] = array("template_content", null, null); ob_start();

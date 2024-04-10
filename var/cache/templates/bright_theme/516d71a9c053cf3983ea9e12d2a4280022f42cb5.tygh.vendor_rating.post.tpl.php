@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21, created on 2024-03-27 10:01:12
+<?php /* Smarty version Smarty-3.1.21, created on 2024-04-10 16:01:00
          compiled from "C:\wamp64\www\cscart\design\themes\responsive\templates\addons\vendor_rating\hooks\companies\vendor_rating.post.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:9762452336603c2cdc3d631-81556776%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:6996033076616554c41d158-21963402%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,12 +11,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'tygh',
     ),
   ),
-  'nocache_hash' => '9762452336603c2cdc3d631-81556776',
+  'nocache_hash' => '6996033076616554c41d158-21963402',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21',
-  'unifunc' => 'content_6603c2cdc748f5_76626581',
   'variables' => 
   array (
     'runtime' => 0,
@@ -25,8 +23,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'auth' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21',
+  'unifunc' => 'content_6616554c4316c6_83244611',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_6603c2cdc748f5_76626581')) {function content_6603c2cdc748f5_76626581($_smarty_tpl) {?><?php if (!is_callable('smarty_function_set_id')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.set_id.php';
+<?php if ($_valid && !is_callable('content_6616554c4316c6_83244611')) {function content_6616554c4316c6_83244611($_smarty_tpl) {?><?php if (!is_callable('smarty_function_set_id')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.set_id.php';
 ?><?php if ($_smarty_tpl->tpl_vars['runtime']->value['customization_mode']['design']=="Y"&&(defined('AREA') ? constant('AREA') : null)=="C") {
 $_smarty_tpl->_capture_stack[0][] = array("template_content", null, null); ob_start();
 if ($_smarty_tpl->tpl_vars['show_vendor_rating']->value) {?>

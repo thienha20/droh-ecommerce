@@ -105,8 +105,8 @@ class MigrationHelper
                 $content = trim(file_get_contents($file));
                 if ($content) {
                     $arrStatement = explode(';', $content);
+                    db_query("SET autocommit = 0");
                     db_query("START TRANSACTION;");
-                    db_query("SET autocommit = 1");
                     try {
                         $new_migrate_id = db_query("INSERT INTO ?:droh_migrations ?e", [
                             "name" => $f["name"],
@@ -122,9 +122,9 @@ class MigrationHelper
                             "finished_at" => date('Y-m-d H:i:s')
                         ], $new_migrate_id);
                         echo 'End migration: {' . $f['name'] . '}' . PHP_EOL;
-                        db_query("COMMIT");
+                        db_query("COMMIT;");
                     } catch (Exception $e) {
-                        db_query("ROLLBACK");
+                        db_query("ROLLBACK;");
                         echo 'Error migration: {' . $f['name'] . '}' . PHP_EOL;
                         echo '**************************************' . PHP_EOL;
                         echo $e->getMessage() . PHP_EOL;

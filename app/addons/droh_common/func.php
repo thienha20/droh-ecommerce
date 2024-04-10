@@ -15,6 +15,9 @@
 
 use Tygh\Registry;
 
+require_once __DIR__ .'/func_hook.php';
+require_once __DIR__ .'/func_payment.php';
+
 if (!defined('BOOTSTRAP')) {
     die('Access denied');
 }
