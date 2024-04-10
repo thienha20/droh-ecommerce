@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21, created on 2024-03-27 10:01:12
+<?php /* Smarty version Smarty-3.1.21, created on 2024-04-10 16:01:00
          compiled from "C:\wamp64\www\cscart\design\themes\bright_theme\templates\blocks\products\products_scroller.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:21158851516603c438acb126-74749872%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:14013149336616554cb9a2f4-33384375%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'tygh',
     ),
   ),
-  'nocache_hash' => '21158851516603c438acb126-74749872',
+  'nocache_hash' => '14013149336616554cb9a2f4-33384375',
   'function' => 
   array (
   ),
@@ -49,9 +49,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21',
-  'unifunc' => 'content_6603c439057945_26179209',
+  'unifunc' => 'content_6616554ce14c92_53519497',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_6603c439057945_26179209')) {function content_6603c439057945_26179209($_smarty_tpl) {?><?php if (!is_callable('smarty_function_script')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.script.php';
+<?php if ($_valid && !is_callable('content_6616554ce14c92_53519497')) {function content_6616554ce14c92_53519497($_smarty_tpl) {?><?php if (!is_callable('smarty_function_script')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.script.php';
 if (!is_callable('smarty_block_hook')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\block.hook.php';
 if (!is_callable('smarty_function_math')) include 'C:\\wamp64\\www\\cscart\\app\\lib\\vendor\\smarty\\smarty\\libs\\plugins\\function.math.php';
 if (!is_callable('smarty_function_set_id')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.set_id.php';
@@ -94,8 +94,8 @@ $_smarty_tpl->_capture_stack[0][] = array("template_content", null, null); ob_st
 $_smarty_tpl->tpl_vars['block']->value['properties']['outside_navigation'] = "N";?>
 <?php ob_start();
 echo htmlspecialchars(uniqid(), ENT_QUOTES, 'UTF-8');
-$_tmp7=ob_get_clean();?><?php $_smarty_tpl->createLocalArrayVariable('block', null, 0);
-$_smarty_tpl->tpl_vars['block']->value['block_id'] = ((string)$_smarty_tpl->tpl_vars['block']->value['block_id'])."_".$_tmp7;?>
+$_tmp1=ob_get_clean();?><?php $_smarty_tpl->createLocalArrayVariable('block', null, 0);
+$_smarty_tpl->tpl_vars['block']->value['block_id'] = ((string)$_smarty_tpl->tpl_vars['block']->value['block_id'])."_".$_tmp1;?>
 <?php $_smarty_tpl->tpl_vars['item_quantity'] = new Smarty_variable((($tmp = @$_smarty_tpl->tpl_vars['block']->value['properties']['item_quantity'])===null||$tmp==='' ? 5 : $tmp), null, 0);?>
 <?php $_smarty_tpl->tpl_vars['item_quantity_desktop'] = new Smarty_variable($_smarty_tpl->tpl_vars['item_quantity']->value, null, 0);?>
 <?php $_smarty_tpl->tpl_vars['item_quantity_mobile'] = new Smarty_variable(1, null, 0);?>
@@ -300,8 +300,8 @@ echo Smarty::$_smarty_vars['capture']['template_content'];
 $_smarty_tpl->tpl_vars['block']->value['properties']['outside_navigation'] = "N";?>
 <?php ob_start();
 echo htmlspecialchars(uniqid(), ENT_QUOTES, 'UTF-8');
-$_tmp8=ob_get_clean();?><?php $_smarty_tpl->createLocalArrayVariable('block', null, 0);
-$_smarty_tpl->tpl_vars['block']->value['block_id'] = ((string)$_smarty_tpl->tpl_vars['block']->value['block_id'])."_".$_tmp8;?>
+$_tmp2=ob_get_clean();?><?php $_smarty_tpl->createLocalArrayVariable('block', null, 0);
+$_smarty_tpl->tpl_vars['block']->value['block_id'] = ((string)$_smarty_tpl->tpl_vars['block']->value['block_id'])."_".$_tmp2;?>
 <?php $_smarty_tpl->tpl_vars['item_quantity'] = new Smarty_variable((($tmp = @$_smarty_tpl->tpl_vars['block']->value['properties']['item_quantity'])===null||$tmp==='' ? 5 : $tmp), null, 0);?>
 <?php $_smarty_tpl->tpl_vars['item_quantity_desktop'] = new Smarty_variable($_smarty_tpl->tpl_vars['item_quantity']->value, null, 0);?>
 <?php $_smarty_tpl->tpl_vars['item_quantity_mobile'] = new Smarty_variable(1, null, 0);?>

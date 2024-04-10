@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21, created on 2024-03-27 10:08:46
+<?php /* Smarty version Smarty-3.1.21, created on 2024-04-10 15:54:02
          compiled from "C:\wamp64\www\cscart\design\themes\responsive\templates\common\tabsbox.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:13528515856603c5fe30d2f9-87573902%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1127392901661653aa86b0b0-12635675%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'tygh',
     ),
   ),
-  'nocache_hash' => '13528515856603c5fe30d2f9-87573902',
+  'nocache_hash' => '1127392901661653aa86b0b0-12635675',
   'function' => 
   array (
   ),
@@ -35,9 +35,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21',
-  'unifunc' => 'content_6603c5fe40a1f4_88900521',
+  'unifunc' => 'content_661653aa9583e2_71411232',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_6603c5fe40a1f4_88900521')) {function content_6603c5fe40a1f4_88900521($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_empty_tabs')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\modifier.empty_tabs.php';
+<?php if ($_valid && !is_callable('content_661653aa9583e2_71411232')) {function content_661653aa9583e2_71411232($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_empty_tabs')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\modifier.empty_tabs.php';
 if (!is_callable('smarty_function_script')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.script.php';
 if (!is_callable('smarty_modifier_in_array')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\modifier.in_array.php';
 if (!is_callable('smarty_function_set_id')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.set_id.php';

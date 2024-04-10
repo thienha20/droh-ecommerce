@@ -16,7 +16,7 @@ use Tygh\Registry;
 
 $files = array(
     'literal_converter/general.php',
-    'literal_converter/ru.php',
+    'literal_converter/vi.php',
     'literal_converter/umlauts.php',
 );
 

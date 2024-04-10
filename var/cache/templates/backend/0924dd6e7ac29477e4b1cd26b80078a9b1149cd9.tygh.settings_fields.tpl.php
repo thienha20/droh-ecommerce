@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21, created on 2024-03-27 09:57:04
+<?php /* Smarty version Smarty-3.1.21, created on 2024-04-10 15:53:44
          compiled from "C:\wamp64\www\cscart\design\backend\templates\common\settings_fields.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:12714464756603c340e4e547-43348120%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:199280643866165398314315-77572980%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'tygh',
     ),
   ),
-  'nocache_hash' => '12714464756603c340e4e547-43348120',
+  'nocache_hash' => '199280643866165398314315-77572980',
   'function' => 
   array (
   ),
@@ -65,9 +65,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21',
-  'unifunc' => 'content_6603c3416654b0_66861726',
+  'unifunc' => 'content_6616539898fdb3_13137401',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_6603c3416654b0_66861726')) {function content_6603c3416654b0_66861726($_smarty_tpl) {?><?php if (!is_callable('smarty_block_inline_script')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\block.inline_script.php';
+<?php if ($_valid && !is_callable('content_6616539898fdb3_13137401')) {function content_6616539898fdb3_13137401($_smarty_tpl) {?><?php if (!is_callable('smarty_block_inline_script')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\block.inline_script.php';
 if (!is_callable('smarty_modifier_enum')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\modifier.enum.php';
 if (!is_callable('smarty_modifier_in_array')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\modifier.in_array.php';
 if (!is_callable('smarty_modifier_render_tag_attrs')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\modifier.render_tag_attrs.php';
@@ -170,7 +170,7 @@ if ($_smarty_tpl->tpl_vars['parent_item']->value&&$_smarty_tpl->tpl_vars['parent
 if ($_smarty_tpl->tpl_vars['highlight']->value&&smarty_modifier_in_array($_smarty_tpl->tpl_vars['item']->value['name'],$_smarty_tpl->tpl_vars['highlight']->value)) {?> row-highlight<?php }?>">
         <?php ob_start();
 if ($_smarty_tpl->tpl_vars['item']->value['type']==smarty_modifier_enum("SettingTypes::PHONE")) {?><?php echo " cm-mask-phone-label";?><?php }
-$_tmp1=ob_get_clean();?><?php $_smarty_tpl->tpl_vars['default_label_attrs'] = new Smarty_variable(array("for"=>$_smarty_tpl->tpl_vars['html_id']->value,"class"=>"control-label ".$_tmp1), null, 0);?>
+$_tmp13=ob_get_clean();?><?php $_smarty_tpl->tpl_vars['default_label_attrs'] = new Smarty_variable(array("for"=>$_smarty_tpl->tpl_vars['html_id']->value,"class"=>"control-label ".$_tmp13), null, 0);?>
         <?php $_smarty_tpl->tpl_vars['extended_label_attrs'] = new Smarty_variable(array("class"=>$_smarty_tpl->tpl_vars['highlight']->value&&smarty_modifier_in_array($_smarty_tpl->tpl_vars['item']->value['name'],$_smarty_tpl->tpl_vars['highlight']->value) ? "highlight" : ''), null, 0);?>
         <label <?php echo smarty_modifier_render_tag_attrs($_smarty_tpl->tpl_vars['label_attrs']->value,$_smarty_tpl->tpl_vars['default_label_attrs']->value,$_smarty_tpl->tpl_vars['extended_label_attrs']->value);?>
 ><?php echo $_smarty_tpl->tpl_vars['item']->value['description'];?>
@@ -391,7 +391,7 @@ $_smarty_tpl->tpl_vars['variant_name']->_loop = true;
             <?php } else { ?>
                 <?php ob_start();
 if ($_smarty_tpl->tpl_vars['item']->value['type']===smarty_modifier_enum("SettingTypes::NUMBER")) {?><?php echo " cm-value-integer";?><?php } elseif ($_smarty_tpl->tpl_vars['item']->value['type']===smarty_modifier_enum("SettingTypes::PHONE")) {?><?php echo " cm-mask-phone";?><?php }
-$_tmp2=ob_get_clean();?><?php $_smarty_tpl->tpl_vars['default_attrs'] = new Smarty_variable(array_merge($_smarty_tpl->tpl_vars['default_attrs']->value,array("id"=>((string)$_smarty_tpl->tpl_vars['html_id']->value),"type"=>"text","name"=>((string)$_smarty_tpl->tpl_vars['html_name']->value),"size"=>"30","class"=>$_tmp2,"placeholder"=>((string)$_smarty_tpl->tpl_vars['input_placeholder']->value),"value"=>((string)$_smarty_tpl->tpl_vars['item']->value['value']))), null, 0);?>
+$_tmp14=ob_get_clean();?><?php $_smarty_tpl->tpl_vars['default_attrs'] = new Smarty_variable(array_merge($_smarty_tpl->tpl_vars['default_attrs']->value,array("id"=>((string)$_smarty_tpl->tpl_vars['html_id']->value),"type"=>"text","name"=>((string)$_smarty_tpl->tpl_vars['html_name']->value),"size"=>"30","class"=>$_tmp14,"placeholder"=>((string)$_smarty_tpl->tpl_vars['input_placeholder']->value),"value"=>((string)$_smarty_tpl->tpl_vars['item']->value['value']))), null, 0);?>
                 <input <?php echo smarty_modifier_render_tag_attrs($_smarty_tpl->tpl_vars['input_attrs']->value,$_smarty_tpl->tpl_vars['default_attrs']->value);?>
 />
             <?php }?>

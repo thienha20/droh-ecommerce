@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21, created on 2024-03-27 10:01:15
+<?php /* Smarty version Smarty-3.1.21, created on 2024-04-10 16:00:49
          compiled from "C:\wamp64\www\cscart\design\themes\responsive\templates\blocks\list_templates\grid_list.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:3937175256603c43b38a227-67450587%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:104898867766165541c89f17-25884078%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'tygh',
     ),
   ),
-  'nocache_hash' => '3937175256603c43b38a227-67450587',
+  'nocache_hash' => '104898867766165541c89f17-25884078',
   'function' => 
   array (
   ),
@@ -51,9 +51,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21',
-  'unifunc' => 'content_6603c43b97e775_91957721',
+  'unifunc' => 'content_66165542022305_67073126',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_6603c43b97e775_91957721')) {function content_6603c43b97e775_91957721($_smarty_tpl) {?><?php if (!is_callable('smarty_function_script')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.script.php';
+<?php if ($_valid && !is_callable('content_66165542022305_67073126')) {function content_66165542022305_67073126($_smarty_tpl) {?><?php if (!is_callable('smarty_function_script')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.script.php';
 if (!is_callable('smarty_function_split')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.split.php';
 if (!is_callable('smarty_function_math')) include 'C:\\wamp64\\www\\cscart\\app\\lib\\vendor\\smarty\\smarty\\libs\\plugins\\function.math.php';
 if (!is_callable('smarty_block_hook')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\block.hook.php';

@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21, created on 2024-03-27 09:57:13
+<?php /* Smarty version Smarty-3.1.21, created on 2024-04-10 15:53:45
          compiled from "C:\wamp64\www\cscart\design\backend\templates\views\storefronts\components\picker\presets.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:2684584196603c349ba4ff8-20082786%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:930945966165399480902-66924651%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'tygh',
     ),
   ),
-  'nocache_hash' => '2684584196603c349ba4ff8-20082786',
+  'nocache_hash' => '930945966165399480902-66924651',
   'function' => 
   array (
   ),
@@ -34,9 +34,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21',
-  'unifunc' => 'content_6603c349d66ad4_87055155',
+  'unifunc' => 'content_6616539957f716_94988702',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_6603c349d66ad4_87055155')) {function content_6603c349d66ad4_87055155($_smarty_tpl) {?><?php
+<?php if ($_valid && !is_callable('content_6616539957f716_94988702')) {function content_6616539957f716_94988702($_smarty_tpl) {?><?php
 \Tygh\Languages\Helper::preloadLangVars(array('show_all_storefronts','all_storefronts_short','all_storefronts_short','select_storefront','show_all_storefronts_with_count','all_storefronts_short','all_storefronts_short','all_storefronts'));
 ?>
 <?php $_smarty_tpl->tpl_vars['is_enabled'] = new Smarty_variable($_smarty_tpl->tpl_vars['app']->value["storefront.switcher.is_enabled"], null, 0);?>
