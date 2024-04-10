@@ -74,7 +74,19 @@ if ($mode === 'update') {
 
     $destination_data = array();
 
-    $destination_data['states'] = db_get_hash_single_array("SELECT a.state_id, CONCAT(d.country, ': ', b.state) as state FROM ?:states as a LEFT JOIN ?:state_descriptions as b ON b.state_id = a.state_id AND b.lang_code = ?s LEFT JOIN ?:destination_elements as c ON c.element_type = 'S' AND c.element = a.state_id LEFT JOIN ?:country_descriptions as d ON d.code = a.country_code AND d.lang_code = ?s WHERE c.destination_id = ?i", array('state_id', 'state'), DESCR_SL, DESCR_SL, $_REQUEST['destination_id']);
+    $destination_data['states'] = db_get_hash_single_array("SELECT a.state_id, CONCAT(d.country, ': ', b.state) as state FROM ?:states as a 
+        LEFT JOIN ?:state_descriptions as b ON b.state_id = a.state_id AND b.lang_code = ?s 
+        LEFT JOIN ?:destination_elements as c ON c.element_type = 'S' AND c.element = a.state_id 
+        LEFT JOIN ?:country_descriptions as d ON d.code = a.country_code AND d.lang_code = ?s 
+        WHERE c.destination_id = ?i", array('state_id', 'state'), DESCR_SL, DESCR_SL, $_REQUEST['destination_id']);
+    
+    $destination_data['districts'] = db_get_hash_single_array("SELECT a.district_id, CONCAT(d.country, ': ',  f.state, ': ', b.name) as district FROM ?:districts as a 
+        LEFT JOIN ?:district_descriptions as b ON b.district_id = a.district_id AND b.lang_code = ?s 
+        LEFT JOIN ?:destination_elements as c ON c.element_type = 'T' AND c.element = a.district_id 
+        LEFT JOIN ?:country_descriptions as d ON d.code = a.country_code AND d.lang_code = ?s 
+        LEFT JOIN ?:states as e ON e.code = a.state_code
+        LEFT JOIN ?:state_descriptions as f ON f.state_id = e.state_id AND f.lang_code = ?s 
+        WHERE c.destination_id = ?i", array('district_id', 'district'), DESCR_SL, DESCR_SL, DESCR_SL, $_REQUEST['destination_id']);
 
     $destination_data['countries'] = db_get_hash_single_array("SELECT a.code, b.country FROM ?:countries as a LEFT JOIN ?:country_descriptions as b ON b.code = a.code AND b.lang_code = ?s LEFT JOIN ?:destination_elements as c ON c.element_type = 'C' AND c.element = a.code WHERE c.destination_id = ?i", array('code', 'country'), DESCR_SL, $_REQUEST['destination_id']);
 
@@ -93,10 +105,14 @@ if ($mode === 'update') {
     $all_states = fn_destination_get_states(DESCR_SL);
     $all_states = array_diff_assoc($all_states, $destination_data['states']);
 
+    $all_districts = fn_destination_get_districts(DESCR_SL);
+    $all_districts = array_diff_assoc($all_districts, $destination_data['districts']);
+
     Tygh::$app['view']->assign('destination_data', $destination_data);
     Tygh::$app['view']->assign('destination', $destination);
 
     Tygh::$app['view']->assign('states', $all_states);
+    Tygh::$app['view']->assign('districts', $all_districts);
     Tygh::$app['view']->assign('countries', $all_countries);
 
     $tabs = Registry::ifGet('navigation.tabs', []);
@@ -109,6 +125,7 @@ if ($mode === 'update') {
 } elseif ($mode === 'add') {
 
     Tygh::$app['view']->assign('states', fn_destination_get_states(DESCR_SL));
+    Tygh::$app['view']->assign('districts', fn_destination_get_districts(DESCR_SL));
     Tygh::$app['view']->assign('countries', fn_get_simple_countries(true, DESCR_SL));
 
     Registry::set('navigation.tabs', [

@@ -409,6 +409,10 @@
     },
     initPlainCityInput: function initPlainCityInput() {
       var $states = methods.getElement('state', true);
+      var $districts = methods.getElement('district', true);
+      var $wards = methods.getElement('ward', true);
+      var $country = methods.getElement('country', true);
+      var $wards = methods.getElement('ward', true);
       $city.on('focus', function (e) {
         if ($(this).val() !== '') {
           return;
@@ -441,9 +445,43 @@
       }).on('input change', function (e) {
         $states.val(methods.getElement('state').val());
         methods.lockShippingMethodSelector();
-      }).on('change', function (e) {
+      }).on('change', function (e, extra) {
         if ($(e.target).data('caEventType') !== 'keydown' || $(e.target).data('caEventKeyCode') === KEY_CODE_DOWN_ARROW || $(e.target).data('caEventKeyCode') === KEY_CODE_UP_ARROW) {
+          // get disctricts by state
+          $.ceAjax('request', fn_url('location.state_districts'), {
+            data: {
+              state_code: $states.val()
+            },
+            method: 'POST',
+            callback: function callback(response) {
+              var responseJson = JSON.parse(response['text']);
+              $districts
+                .find('option')
+                .remove()
+                .end()
+                .append('<option data-ca-rebuild-districts="skip" value = ""> Select District </option>')
+                .val('whatever');
+              for (let i = 0; i < responseJson['list_district'].length; i++) {
+                $districts.append(`<option value="${responseJson['list_district'][i].code}">
+                                  ${responseJson['list_district'][i].district}
+                              </option>`
+                  );
+              }
+              $districts.val('');
+              // remove wards
+              $wards
+              .find('option')
+              .remove()
+              .end()
+              .append('<option data-ca-rebuild-wards="skip" selected value = ""> Select Ward </option>')
+              .val('whatever');
+              methods.lockShippingMethodSelector();
+            }
+          });
           $city.focus();
+        }
+        if (!$city.length) {
+          methods.lockShippingMethodSelector();
         }
       }).on('keypress', function (e) {
         var target = $(e.target);
@@ -451,6 +489,61 @@
         if (target.is('select')) {
           e.preventDefault();
         }
+      });
+      $districts.on('focus', function (e) {
+        if ($(this).val() !== '') {
+          return;
+        }
+        methods.lockShippingMethodSelector();
+      }).on('keydown', function (e) {
+        $(e.target).data('caEventType', e.type);
+        $(e.target).data('caEventKeyCode', e.keyCode);
+
+        if (e.keyCode === KEY_CODE_ENTER) {
+          e.preventDefault();
+          $city.focus();
+        }
+      }).on('input change', function (e) {
+        $districts.val(methods.getElement('district').val());
+        methods.lockShippingMethodSelector();
+      }).on('change', function (e, extra) {
+        if ($(e.target).data('caEventType') !== 'keydown' || $(e.target).data('caEventKeyCode') === KEY_CODE_DOWN_ARROW || $(e.target).data('caEventKeyCode') === KEY_CODE_UP_ARROW) {
+          // get wards by district
+          $.ceAjax('request', fn_url('location.district_wards'), {
+            data: {
+              district_code: $districts.val()
+            },
+            method: 'POST',
+            callback: function callback(response) {
+              var responseJson = JSON.parse(response['text']);
+              $wards
+                .find('option')
+                .remove()
+                .end()
+                .append('<option data-ca-rebuild-districts="skip" selected value = ""> Select District </option>')
+                .val('whatever');
+              for (let i = 0; i < responseJson['list_ward'].length; i++) {
+                $wards.append(`<option value="${responseJson['list_ward'][i].code}">
+                                  ${responseJson['list_ward'][i].ward}
+                              </option>`
+                  );
+              }
+            }
+          });
+          $city.focus();
+        }
+        if (!$city.length) {
+          methods.lockShippingMethodSelector();
+        }
+      }).on('keypress', function (e) {
+        var target = $(e.target);
+
+        if (target.is('select')) {
+          e.preventDefault();
+        }
+      });
+      $wards.on('change', function (e, extra) {
+        methods.lockShippingMethodSelector();
       });
       $country.on('change', function (e, extra) {
         if (extra && !extra.is_triggered_by_user) {

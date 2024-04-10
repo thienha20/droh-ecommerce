@@ -4213,7 +4213,14 @@ function fn_calculate_cart_content(
                     ) {
                         $rate['price'] = 0;
                     }
-                    if (!empty($product_groups[$group_key]['shippings'][$shipping_id]['rate_info'])) {
+                    if ($product_groups[$group_key]['shippings'][$shipping_id]['service_code'] == 'GHN'
+                        && $rate['price'] !== false
+                    ) {
+                        $product_groups[$group_key]['shippings'][$shipping_id]['rate_info']['rate_value'] = $rate['price'];
+                        $product_groups[$group_key]['shippings'][$shipping_id]['rate_info']['delivery_time'] =  $product_groups[$group_key]['shippings'][$shipping_id]['delivery_time'];
+                        $product_groups[$group_key]['shippings'][$shipping_id]['rate_info']['base_rate'] =  $rate['price'];
+                        $product_groups[$group_key]['shippings'][$shipping_id]['rate'] = $rate['price'];
+                    } elseif(!empty($product_groups[$group_key]['shippings'][$shipping_id]['rate_info'])){
                         if ($rate['price'] !== false) {
                             $rate['price'] += !empty($package_info['shipping_freight'])
                                 ? $package_info['shipping_freight']
@@ -4853,6 +4860,8 @@ function fn_get_customer_location($auth, $cart, $billing = false)
             $prefix . 'country' => Registry::get('settings.Checkout.default_country'),
             $prefix . 'state'   => Registry::get('settings.Checkout.default_state'),
             $prefix . 'city'    => Registry::get('settings.Checkout.default_city'),
+            $prefix . 'district'=> Registry::get('settings.Checkout.default_district'),
+            $prefix . 'ward'=> Registry::get('settings.Checkout.default_ward')
         ];
 
         if (!isset($u_info[$prefix . 'zipcode'])
@@ -4895,6 +4904,20 @@ function fn_get_customer_location($auth, $cart, $billing = false)
             $avail_state = db_get_field("SELECT COUNT(*) FROM ?:states WHERE country_code = ?s AND code = ?s AND status = 'A'", $s_info['country'], $s_info['state']);
             if (empty($avail_state)) {
                 $s_info['state'] = '';
+            }
+        }
+
+        if (!empty($s_info['district'])) {
+            $avail_district = db_get_field("SELECT COUNT(*) FROM ?:districts WHERE state_code = ?s AND code = ?s AND status = 'A'", $s_info['state'], $s_info['district']);
+            if (empty($avail_district)) {
+                $s_info['district'] = '';
+            }
+        }
+
+        if (!empty($s_info['ward'])) {
+            $avail_ward = db_get_field("SELECT COUNT(*) FROM ?:wards WHERE district_code = ?s AND code = ?s AND status = 'A'", $s_info['district'], $s_info['ward']);
+            if (empty($avail_ward)) {
+                $s_info['ward'] = '';
             }
         }
     }

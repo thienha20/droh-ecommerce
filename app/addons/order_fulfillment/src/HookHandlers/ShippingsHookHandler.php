@@ -49,6 +49,8 @@ class ShippingsHookHandler
             'city'       => $marketplace_data['company_city'],
             'country'    => $marketplace_data['company_country'],
             'state'      => $marketplace_data['company_state'],
+            'district'   => $marketplace_data['company_district'],
+            'ward'       => $marketplace_data['company_ward'],
             'zipcode'    => $marketplace_data['company_zipcode'],
             'phone'      => $marketplace_data['company_phone'],
             'company_id' => 0,

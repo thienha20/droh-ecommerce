@@ -1756,6 +1756,10 @@ msgctxt "Languages::carrier_usps"
 msgid "USPS"
 msgstr "USPS"
 
+msgctxt "Languages::carrier_ghn"
+msgid "GHN"
+msgstr "GHN"
+
 msgctxt "Languages::cart"
 msgid "Cart"
 msgstr "Cart"
@@ -9432,6 +9436,10 @@ msgstr "Package length"
 msgctxt "Languages::ship_dhl_site_id"
 msgid "Site ID"
 msgstr "Site ID"
+
+msgctxt "Languages::ship_ghn_shop_id"
+msgid "Shop ID"
+msgstr "Shop ID"
 
 msgctxt "Languages::ship_dhl_width"
 msgid "Package width"

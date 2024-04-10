@@ -116,23 +116,60 @@
             </label>
         {/foreach}
     {elseif $field.field_type == "ProfileFieldTypes::SELECT_BOX"|enum}
-        <select class="litecheckout__input{if $field.class} {$field.class}{/if}{$input_meta}"
-                autocomplete="{$field.autocomplete}"
-                id="{$field_id}"
-                data-ca-lite-checkout-field="{$field_name_helper}"
-                data-ca-lite-checkout-auto-save-on-change="true"
-                aria-label="{$field.description}"
-                title="{$field.description}"
-                name="{$field_name}"
-                {$field.attributes|render_tag_attrs nofilter}
-        >
-            {if $field.required == "YesNo::NO"|enum}
-                <option value="">--</option>
-            {/if}
-            {foreach $field.values as $value => $name}
-                <option {if $field_value == $value}selected{/if} value="{$value}">{$name}</option>
-            {/foreach}
-        </select>
+        {if $field.field_name == 's_district'}
+            {$state = $user_data.s_state}
+            {$district = $user_data.s_district}
+            <select data-ca-lite-checkout-field="user_data.s_district"
+                    class="cm-district cm-location-shipping litecheckout__input litecheckout__input--selectable litecheckout__input--selectable--select"
+                    data-ca-lite-checkout-element="district"
+                    data-ca-lite-checkout-is-district-code-container="true"
+                    data-ca-lite-checkout-last-value="{$district}"
+                    id="litecheckout_district"
+            >
+                <option disabled data-ca-rebuild-districts="skip" {if !$district}selected{/if}>{__("select_district")}</option>
+                {foreach $field.values[$state] as $state_district}
+                    <option value="{$state_district.code}"
+                            {if $state_district.code === $district}selected{/if}
+                    >{$state_district.district}</option>
+                {/foreach}
+            </select>
+        {elseif $field.field_name == 's_ward'}
+            {$state = $user_data.s_state}
+            {$district = $user_data.s_district}
+            {$ward = $user_data.s_ward}
+            <select data-ca-lite-checkout-field="user_data.s_ward"
+                    class="cm-district cm-location-shipping litecheckout__input litecheckout__input--selectable litecheckout__input--selectable--select"
+                    data-ca-lite-checkout-element="ward"
+                    data-ca-lite-checkout-is-ward-code-container="true"
+                    data-ca-lite-checkout-last-value="{$ward}"
+                    id="litecheckout_ward"
+            >
+                <option disabled data-ca-rebuild-wards="skip" {if !$ward}selected{/if}>{__("select_ward")}</option>
+                {foreach $field.values[$district] as $district_ward}
+                    <option value="{$district_ward.code}"
+                            {if $district_ward.code === $ward}selected{/if}
+                    >{$district_ward.ward}</option>
+                {/foreach}
+            </select>
+        {else}
+            <select class="litecheckout__input{if $field.class} {$field.class}{/if}{$input_meta}"
+                    autocomplete="{$field.autocomplete}"
+                    id="{$field_id}"
+                    data-ca-lite-checkout-field="{$field_name_helper}"
+                    data-ca-lite-checkout-auto-save-on-change="true"
+                    aria-label="{$field.description}"
+                    title="{$field.description}"
+                    name="{$field_name}"
+                    {$field.attributes|render_tag_attrs nofilter}
+            >
+                {if $field.required == "YesNo::NO"|enum}
+                    <option value="">--</option>
+                {/if}
+                {foreach $field.values as $value => $name}
+                    <option {if $field_value == $value}selected{/if} value="{$value}">{$name}</option>
+                {/foreach}
+            </select>
+        {/if}
     {elseif $field.field_type == "ProfileFieldTypes::ADDRESS_TYPE"|enum}
         <label for="{$field_id}_residential">
             <input class="radio litecheckout__input{if $field.class} {$field.class}{/if}{$input_meta}"

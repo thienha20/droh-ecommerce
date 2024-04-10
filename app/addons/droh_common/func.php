@@ -390,6 +390,46 @@ function fn_get_district_by_city($country, $state, $lang_code = CART_LANGUAGE)
     return $district;
 }
 
+function fn_get_districts_by_state($state, $lang_code = CART_LANGUAGE)
+{
+    $key = md5("location-".$state.$lang_code);
+    Registry::registerCache(array('state_district', $key), array("districts"), Registry::cacheLevel('static'));
+    if(Registry::isExist($key)) return Registry::get($key);
+    $fields = array(
+        'b.code',
+        'b.state_code',
+        'bd.name as district'
+    );
+
+    $district = db_get_array(
+        "SELECT ?p FROM ?:districts b " .
+        " LEFT JOIN ?:district_descriptions bd ON b.district_id = bd.district_id AND bd.lang_code = ?s " .
+        " WHERE b.state_code = ?s AND b.status IN ('A') ORDER BY b.position asc, bd.name asc", implode(", ", $fields), $lang_code, $state
+    );
+    Registry::set($key, $district);
+    return $district;
+}
+
+function fn_get_wards_by_district($district, $lang_code = CART_LANGUAGE)
+{
+    $key = md5("location-".$district.$lang_code);
+    Registry::registerCache(array('district_ward', $key), array("wards"), Registry::cacheLevel('static'));
+    if(Registry::isExist($key)) return Registry::get($key);
+    $fields = array(
+        'b.code',
+        'b.district_code',
+        'bd.name as ward'
+    );
+
+    $ward = db_get_array(
+        "SELECT ?p FROM ?:wards b " .
+        " LEFT JOIN ?:ward_descriptions bd ON b.ward_id = bd.ward_id AND bd.lang_code = ?s " .
+        " WHERE b.district_code = ?s AND b.status IN ('A') ORDER BY b.position asc, bd.name asc", implode(", ", $fields), $lang_code, $district
+    );
+    Registry::set($key, $ward);
+    return $ward;
+}
+
 function fn_get_district_name($district_code, $state_code, $lang_code = CART_LANGUAGE)
 {
     $fields = array(
@@ -440,3 +480,24 @@ function fn_get_state_data($state_id, $lang_code = CART_LANGUAGE)
     return $city;
 }
 
+function fn_get_districtGhn($district_code_local){
+    $fields = array(
+        'b.area_external_id'
+    );
+    $district = db_get_field(
+        "SELECT ?p FROM ?:map_code_areas b " .
+        " WHERE b.code_area_type = ?s AND b.shipping_service_code=?s AND area_local_code=?s", implode(", ", $fields), 'district', 'GHN', $district_code_local
+    );
+    return $district;
+}
+
+function fn_get_wardGhn($ward_code_local){
+    $fields = array(
+        'b.area_external_code'
+    );
+    $district = db_get_field(
+        "SELECT ?p FROM ?:map_code_areas b " .
+        " WHERE b.code_area_type = ?s AND b.shipping_service_code=?s AND area_local_code=?s", implode(", ", $fields), 'ward', 'GHN', $ward_code_local
+    );
+    return $district;
+}

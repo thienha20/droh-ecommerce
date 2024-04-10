@@ -682,6 +682,18 @@ function fn_add_user_data_descriptions(&$user_data, $lang_code = CART_LANGUAGE)
             $user_data['s_state_descr'] = $user_data['s_state'];
         }
     }
+    if (!empty($user_data['s_district'])) {
+        $user_data['s_district_descr'] = fn_get_district_name($user_data['s_district'], $user_data['s_state'], $lang_code);
+        if (empty($user_data['s_district_descr'])) {
+            $user_data['s_district_descr'] = $user_data['s_district'];
+        }
+    }
+    if (!empty($user_data['s_ward'])) {
+        $user_data['s_ward_descr'] = fn_get_ward_name($user_data['s_ward'], $user_data['s_district'], $lang_code);
+        if (empty($user_data['s_ward_descr'])) {
+            $user_data['s_ward_descr'] = $user_data['s_ward'];
+        }
+    }
 }
 
 function fn_fill_address(&$user_data, &$profile_fields, $use_default = false)
@@ -841,11 +853,25 @@ function fn_fill_user_fields(&$user_data)
             $user_data['s_state'] = Registry::get('settings.General.default_state');
         }
 
+        if (empty($user_data['s_district']) && $user_data['s_state'] === Registry::get('settings.General.default_state')) {
+            $user_data['s_district'] = Registry::get('settings.General.default_district');
+        }
+
+        if (empty($user_data['s_ward']) && $user_data['s_district'] === Registry::get('settings.General.default_district')) {
+            $user_data['s_ward'] = Registry::get('settings.General.default_ward');
+        }
+
         if (empty($user_data['b_country'])) {
             $user_data['b_country'] = Registry::get('settings.General.default_country');
         }
         if (empty($user_data['b_state']) && $user_data['s_country'] === Registry::get('settings.General.default_country')) {
             $user_data['b_state'] = Registry::get('settings.General.default_state');
+        }
+        if (empty($user_data['b_district']) && $user_data['b_state'] === Registry::get('settings.General.default_state')) {
+            $user_data['b_district'] = Registry::get('settings.General.default_district');
+        }
+        if (empty($user_data['b_ward']) && $user_data['b_district'] === Registry::get('settings.General.default_district')) {
+            $user_data['b_ward'] = Registry::get('settings.General.default_ward');
         }
     }
 
@@ -1006,7 +1032,13 @@ function fn_get_profile_fields($location = ProfileFieldLocations::CUSTOMER_FIELD
                         $_id = db_get_field("SELECT field_id FROM ?:profile_fields WHERE matching_id = ?i", $v['field_id']);
                     }
                 }
-                $profile_fields[$section][$k]['values'] = db_get_hash_single_array("SELECT ?:profile_field_values.value_id, ?:profile_field_descriptions.description FROM ?:profile_field_values LEFT JOIN ?:profile_field_descriptions ON ?:profile_field_descriptions.object_id = ?:profile_field_values.value_id AND ?:profile_field_descriptions.object_type = 'V' AND ?:profile_field_descriptions.lang_code = ?s WHERE ?:profile_field_values.field_id = ?i ORDER BY ?:profile_field_values.position", array('value_id', 'description'), $lang_code, $_id);
+                if($v['field_name'] == 's_district'){
+                    $profile_fields[$section][$k]['values'] = fn_get_all_districts(true, $lang_code);
+                }elseif($v['field_name'] == 's_ward'){
+                    $profile_fields[$section][$k]['values'] = fn_get_all_wards(true, $lang_code);
+                }else{
+                    $profile_fields[$section][$k]['values'] = db_get_hash_single_array("SELECT ?:profile_field_values.value_id, ?:profile_field_descriptions.description FROM ?:profile_field_values LEFT JOIN ?:profile_field_descriptions ON ?:profile_field_descriptions.object_id = ?:profile_field_values.value_id AND ?:profile_field_descriptions.object_type = 'V' AND ?:profile_field_descriptions.lang_code = ?s WHERE ?:profile_field_values.field_id = ?i ORDER BY ?:profile_field_values.position", array('value_id', 'description'), $lang_code, $_id);
+                }
             }
         }
     }
