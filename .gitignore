@@ -14,3 +14,4 @@ robots.txt!/.htaccess
 /var/snapshots/*
 /images/*
 /var/files/*
+/upgrades
