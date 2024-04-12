@@ -114,7 +114,7 @@ if (defined('PAYMENT_NOTIFICATION')) {
         fn_droh_common_finish_online_payment([
             "amount" => $_REQUEST['pg_amount'],
             "currency" => $_REQUEST['pg_currency'],
-            "message" => $_REQUEST['message'] ?? '',
+            "message" => $_REQUEST['pg_order_info'] ?? '',
             "transaction_ref_no" => $_REQUEST['pg_transaction_number'] ?? '',
             "partner_status_code" => $_REQUEST['error_code'],
             "signature" => $_REQUEST['mac'],
