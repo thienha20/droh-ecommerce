@@ -15,6 +15,7 @@
 use Tygh\Enum\NotificationSeverity;
 use Tygh\Registry;
 use Tygh\Shippings\Shippings;
+use Tygh\Shippings\RealtimeServices;
 
 if (!defined('BOOTSTRAP')) { die('Access denied'); }
 
@@ -23,13 +24,56 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($mode === 'add' && !empty($_REQUEST['shipment_data'])) {
         $force_notification = fn_get_notification_rules($_REQUEST);
-        fn_update_shipment($_REQUEST['shipment_data'], 0, 0, false, $force_notification);
+        $shipment_id = fn_update_shipment($_REQUEST['shipment_data'], 0, 0, false, $force_notification);
 
         if (empty($_REQUEST['shipment_data']['tracking_number']) && empty($_REQUEST['shipment_data']['carrier'])) {
             fn_set_notification(NotificationSeverity::ERROR, __('notice'), __('error_shipment_not_created'));
         }
 
         $suffix = '.details?order_id=' . $_REQUEST['shipment_data']['order_id'];
+
+        // Create Order To GHN
+        if($_REQUEST['shipment_data']['carrier'] == 'ghn'){
+            RealtimeServices::clearStack();
+
+            $order_info = fn_get_order_info($_REQUEST['shipment_data']['order_id'], false, true, true);
+            // get GHN Service
+            $ghn = db_get_row('SELECT shipping_id, service_params FROM ?:shippings WHERE service_id = ?i', 600);
+            $shipping = array(
+                'service_params' =>  unserialize($ghn['service_params']),
+                'module' => 'ghn',
+                'shipping_id' => $ghn['shipping_id'],
+                'package_info' => array(
+                    'products' => $_REQUEST['shipment_data']['products'],
+                    'comments' => $_REQUEST['shipment_data']['comments'],
+                    'origination' => $order_info['product_groups'][0]['package_info']['origination'],
+                    'location'    => $order_info['product_groups'][0]['package_info']['location'],
+                    'W' => $order_info['product_groups'][0]['package_info']['W'],
+                    'CustomerPhone' => $order_info['phone'],
+                    'OrderCode' => $_REQUEST['shipment_data']['order_id'],
+                    'CollectMoney' => $order_info['payment_method']['payment'] == 'C.O.D' ?  $order_info['total'] : 0,
+                    'PaymentTypeId' =>  2 // Buyer/Consignee pay shipping fee.
+                ),
+                'shipment_id' => $shipment_id
+            );
+            $error = RealtimeServices::registerCreateOrder($shipping['shipping_id'], $shipping);
+            if (empty($error)) {
+                $orderGhn = RealtimeServices::createOrderShipment();
+                if ($orderGhn['error'] == false){
+                    // Update tracking_number, expected_delivery_time, status to shipment
+                    $expected_delivery_time = new DateTime($orderGhn['expected_delivery_time']);
+                    $expected_delivery_time->getTimestamp();
+                    $shipment_data = [
+                        'tracking_number' =>  $orderGhn['tracking_number'],
+                        'timestamp' => $expected_delivery_time->getTimestamp(),
+                        'status' => 'B'
+                    ];
+                    fn_update_shipment($shipment_data, $orderGhn['shipment_id']);
+                }
+            }else{
+                fn_set_notification(NotificationSeverity::ERROR, __('notice'), __('error_shipment_not_created'));
+            }
+        }
     }
 
     if ($mode === 'update') {

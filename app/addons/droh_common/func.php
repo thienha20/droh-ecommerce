@@ -491,13 +491,88 @@ function fn_get_districtGhn($district_code_local){
     return $district;
 }
 
+function fn_get_stateNameGhn($state_code_local){
+    $fields = array(
+        'b.area_external_name'
+    );
+    $district = db_get_field(
+        "SELECT ?p FROM ?:map_code_areas b " .
+        " WHERE b.code_area_type = ?s AND b.shipping_service_code=?s AND area_local_code=?s", implode(", ", $fields), 'state', 'GHN', $state_code_local
+    );
+    return $district;
+}
+
+function fn_get_districtNameGhn($district_code_local){
+    $fields = array(
+        'b.area_external_name'
+    );
+    $district = db_get_field(
+        "SELECT ?p FROM ?:map_code_areas b " .
+        " WHERE b.code_area_type = ?s AND b.shipping_service_code=?s AND area_local_code=?s", implode(", ", $fields), 'district', 'GHN', $district_code_local
+    );
+    return $district;
+}
+
 function fn_get_wardGhn($ward_code_local){
     $fields = array(
         'b.area_external_code'
     );
-    $district = db_get_field(
+    $ward = db_get_field(
         "SELECT ?p FROM ?:map_code_areas b " .
         " WHERE b.code_area_type = ?s AND b.shipping_service_code=?s AND area_local_code=?s", implode(", ", $fields), 'ward', 'GHN', $ward_code_local
     );
-    return $district;
+    return $ward;
+}
+
+function fn_get_wardNameGhn($ward_code_local){
+    $fields = array(
+        'b.area_external_name'
+    );
+    $ward = db_get_field(
+        "SELECT ?p FROM ?:map_code_areas b " .
+        " WHERE b.code_area_type = ?s AND b.shipping_service_code=?s AND area_local_code=?s", implode(", ", $fields), 'ward', 'GHN', $ward_code_local
+    );
+    return $ward;
+}
+
+function fn_get_shipment_status_local_form_ghn($shipment_status_ghn){
+    $shipment_status_local = 'B';
+    switch ($shipment_status_ghn) {
+        case 'ready_to_pick':
+            $shipment_status_local = 'B';
+            break;
+        case 'picking':
+            $shipment_status_local = 'C';
+            break;
+        case 'picked':
+            $shipment_status_local = 'P';
+            break;
+        case 'delivering':
+            $shipment_status_local = 'D';
+            break;
+        case 'delivered':
+            $shipment_status_local = 'E';
+            break;
+        case 'delivery_fail':
+            $shipment_status_local = 'S';
+            break;
+        case 'damage':
+            $shipment_status_local = 'A';
+            break;
+        case 'lost':
+            $shipment_status_local = 'F';
+            break;
+        case 'retuning':
+            $shipment_status_local = 'G';
+            break;
+        case 'retuned':
+            $shipment_status_local = 'H';
+            break;
+        case 'retun_fail':
+            $shipment_status_local = 'I';
+            break;
+        default:
+            $shipment_status_local = 'B';
+      }
+    return $shipment_status_local;
 }

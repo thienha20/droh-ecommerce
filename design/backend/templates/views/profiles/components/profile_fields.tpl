@@ -135,7 +135,30 @@
         {include file="common/calendar.tpl" date_id="elm_`$field.field_id`" date_name="`$data_name`[`$data_id`]" date_val=$value extra=$disabled_param}
 
     {elseif $field.field_type == "ProfileFieldTypes::SELECT_BOX"|enum}
-        <select id={$element_id} name="{$data_name}[{$data_id}]" {$disabled_param nofilter}>
+        {if $field.field_name == "v_district"}
+            {$_state = $company_data.state}
+            {$_district = $company_data.district}
+            <select class="cm-district">
+                {if $districts && $districts.$_state}
+                    <option value="">- {__("select_district")} -</option>
+                    {foreach from=$districts.$_state item=district}
+                        <option {if $_district == $district.code}selected="selected"{/if} value="{$district.code}">{$district.district}</option>
+                    {/foreach}
+                {/if}
+            </select>
+        {elseif $field.field_name == 'v_ward'}
+            {$_district = $company_data.district}
+            {$_ward = $company_data.ward}
+            <select class="cm-ward">
+                {if $wards && $wards.$_district}
+                    <option value="">- {__("select_ward")} -</option>
+                    {foreach from=$wards.$_district item=ward}
+                        <option {if $_ward == $ward.code}selected="selected"{/if} value="{$ward.code}">{$ward.ward}</option>
+                    {/foreach}
+                {/if}
+            </select>
+        {else}
+            <select id={$element_id} name="{$data_name}[{$data_id}]" {$disabled_param nofilter}>
             {if $required != "Y"}
             <option value="">--</option>
             {/if}
@@ -143,7 +166,7 @@
             <option {if $value == $k}selected="selected"{/if} value="{$k}">{$v}</option>
             {/foreach}
         </select>
-
+        {/if}
     {elseif $field.field_type == "ProfileFieldTypes::RADIO"|enum}
         <div class="select-field">
         {foreach from=$field.values key=k item=v name="rfe"}

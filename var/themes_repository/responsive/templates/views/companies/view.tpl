@@ -44,7 +44,16 @@
                                 {elseif $field_data.field_type === "ProfileFieldTypes::RADIO"|enum
                                     || $field_data.field_type === "ProfileFieldTypes::SELECT_BOX"|enum
                                 }
-                                    <span>{$field_data.values.$field_value}</span>
+                                    {if $field_data.field_name == 'v_district'}
+                                        <script>console.log('v_district')</script>
+                                        <span><bdi>{$field_value|fn_get_district_name:$company_data.district}</bdi></span>
+                                    {elseif $field_data.field_name == 'v_ward'}
+                                        <script>console.log('v_ward')</script>
+                                        <span><bdi>{$field_value|fn_get_ward_name:$company_data.ward}</bdi></span>
+                                    {else}
+                                        <script>console.log('field_value')</script>
+                                        <span>{$field_data.values.$field_value}</span>
+                                    {/if}   
                                 {elseif $field_data.field_type === "ProfileFieldTypes::FILE"|enum && $field_value.file_name}
                                     <span><a href="{$field_value.link|default:""}">{$field_value.file_name}</a></span>
                                 {elseif $field_id === "url"} {* FIXME: URL display is hardcoded *}

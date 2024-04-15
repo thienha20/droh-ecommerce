@@ -36,6 +36,12 @@ class Ghn implements IService
      * Development service URL
      */
     const URL_DEVELOPMENT = 'https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee';
+
+    const CREATE_ORDER_URL_PRODUCTION  = 'https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/create';
+    const CREATE_ORDER_URL_DEVELOPMENT  = 'https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/create';
+
+    const ORDER_INFO_URL_PRODUCTION  = 'https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/detail';
+    const ORDER_INFO_URL_DEVELOPMENT  = 'https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/detail';
     /*
      * UPS All countries: Worldwide Express Freight service code
      */
@@ -99,6 +105,32 @@ class Ghn implements IService
             self::URL_PRODUCTION;
     }
 
+    public function prepareDataCreateOrder($shipping_info)
+    {
+        $this->_shipping_info = $shipping_info;
+
+        $this->settings = $shipping_info['service_params'];
+
+        $this->package = $shipping_info['package_info'];
+        $this->package['origination'] = $this->prepareAddress($this->package['origination']);
+        $this->package['location'] = $this->prepareAddress($this->package['location']);
+
+        $this->service_url = isset($this->settings['test_mode']) && $this->settings['test_mode'] == 'Y' ?
+            self::CREATE_ORDER_URL_DEVELOPMENT :
+            self::CREATE_ORDER_URL_PRODUCTION;
+    }
+
+    public function prepareDataOrderInfo($shipping_info)
+    {
+        $this->_shipping_info = $shipping_info;
+
+        $this->settings = $shipping_info['service_params'];
+
+        $this->service_url = isset($this->settings['test_mode']) && $this->settings['test_mode'] == 'Y' ?
+            self::ORDER_INFO_URL_DEVELOPMENT :
+            self::ORDER_INFO_URL_PRODUCTION;
+    }
+
     /**
      * @inheritdoc
      */
@@ -142,29 +174,66 @@ class Ghn implements IService
         return $return;
     }
 
+    public function processResponseCreateOrder($response)
+    {
+        $response = json_decode($response, true);
+        $return = array(
+            'shipment_id' => false,
+            'error' => false,
+            'tracking_number' => false,
+            'order_id' => false,
+            'total_fee' => false,
+            'expected_delivery_time' => false
+        );
+
+        if($response['code'] == 200 && $response['message'] == 'Success'){
+            $return['shipment_id'] = $this->_shipping_info['shipment_id'];
+            $return['order_id'] = $this->_shipping_info['package_info']['OrderCode'];
+            $return['tracking_number'] = $response['data']['order_code'];
+            $return['total_fee'] = $response['data']['total_fee'];
+            $return['expected_delivery_time'] = $response['data']['expected_delivery_time'];
+
+        }else{
+            $return['error'] = $this->processErrors($response);
+        }
+
+        return $return;
+    }
+
+    public function processResponseOrderInfo($response)
+    {
+        $response = json_decode($response, true);
+        $return = array(
+            'shipment_id' => false,
+            'error' => false,
+            'tracking_number' => false,
+            'order_id' => false,
+            'status' => false
+        );
+
+        if($response['code'] == 200 && $response['message'] == 'Success'){
+            $return['shipment_id'] = $this->_shipping_info['shipment_id'];
+            $return['order_id'] = $response['data']['client_order_code'];
+            $return['tracking_number'] = $response['data']['order_code'];
+            $return['status'] = $response['data']['status'];
+        }else{
+            $return['error'] = $this->processErrors($response);
+        }
+
+        return $return;
+    }
+
     /**
      * @inheritdoc
      */
     public function processErrors($response)
     {
-        // Parse XML message returned by the UPS post server.
-        $xml = @simplexml_load_string($response);
-        $return = '';
-
-        if (!empty($xml)) {
-            $status_code = (string) $xml->Response->ResponseStatusCode;
-
-            if ($status_code != '1') {
-                $return = (string) $xml->Response->Error->ErrorDescription;
-                if (!empty($xml->Response->Error->ErrorDigest)) {
-                    $return .= ' (' . (string) $xml->Response->Error->ErrorDigest . ').';
-                }
-
-                return $return;
-            }
+        $response = json_decode($response, true);
+        if($response['code'] == 400){
+            return $response['code_message_value'];
+        }else{
+            return $response['message'];
         }
-
-        return false;
     }
 
     /**
@@ -194,6 +263,36 @@ class Ghn implements IService
         return $request_data;
     }
 
+    public function getRequestDataCreateOrder()
+    {
+        $request_data = array(
+            'method' => 'post',
+            'url' => $this->service_url,
+            'data' => $this->getCreateOrderRequest(),
+            'headers' => array(
+                'Content-type: application/json',
+                'Token:' . (empty($this->settings['token']) ? '' : $this->settings['token']),
+                'ShopId:' . (empty($this->settings['system_id']) ? '' : $this->settings['system_id'])
+            )
+        );
+        return $request_data;
+    }
+
+    public function getRequestDataOrderInfo()
+    {
+        $request_data = array(
+            'method' => 'post',
+            'url' => $this->service_url,
+            'data' => $this->getOrderInfoRequest(),
+            'headers' => array(
+                'Content-type: application/json',
+                'Token:' . (empty($this->settings['token']) ? '' : $this->settings['token']),
+                'ShopId:' . (empty($this->settings['system_id']) ? '' : $this->settings['system_id'])
+            )
+        );
+        return $request_data;
+    }
+
     /**
      * @inheritdoc
      */
@@ -220,6 +319,7 @@ class Ghn implements IService
             'state' => '',
             'country' => '',
             'district' => '',
+            'ward' => '',
         );
 
         return array_merge($default_fields, $address);
@@ -261,34 +361,146 @@ class Ghn implements IService
      */
     private function getRatingRequest()
     {
+        //fn_print_die($this->_shipping_info);
         $from_district_id = fn_get_districtGhn($this->_shipping_info['package_info']['origination']['district']);
         $from_ward_code = fn_get_wardGhn($this->_shipping_info['package_info']['origination']['ward']);
-        //$from_ward_code = '21012';
         $to_district_id = fn_get_districtGhn($this->_shipping_info['package_info']['location']['district']);
-        //fn_print_die($to_district_id);
-        $to_ward_code = fn_get_districtGhn($this->_shipping_info['package_info']['location']['ward']);
-        //$to_ward_code = '21012';
-        $height = 50;
-        $length = 20;
-        $width = 20;
-        $weight = 200;
-        $cod_failed_amount = 2000;
+        $to_ward_code = fn_get_wardGhn($this->_shipping_info['package_info']['location']['ward']);
+        $height = null;
+        $length = null;
+        $width = null;
+        $weight = (int)$this->_shipping_info['package_info']['W'];
+        $cod_failed_amount = 0;  // Value of collect money when delivery fail
+        $insurance_value = 0;
+        $service_id = 53320;  // Chuẩn
+        $service_type_id = 2; // Default value: 2:E-Commerce Delivery
+        $coupon = null;
+
         $request = array(
             'from_district_id' => (int)$from_district_id ,
             'from_ward_code' => $from_ward_code ,
-            'service_id' => 53320,
-            'service_type_id' => null,
+            'service_id' => $service_id,
+            'service_type_id' => $service_type_id,
             'to_district_id' => (int)$to_district_id,
             'to_ward_code' => $to_ward_code,
-            'height' => $height,
-            'length' => $length,
-            'weight' => $weight,
-            'width' => $width,
-            'insurance_value' => 10000,
+            //'height' => $height,
+            //'length' => $length,
+            'weight' => $weight == 0 ? 3000 : $weight,
+            //'width' => $width,
+            'insurance_value' => $insurance_value,
             'cod_failed_amount' => $cod_failed_amount,
-            'coupon' => null
+            'coupon' =>  $coupon
         );
-        //fn_print_die($request);
+
+        return json_encode($request);
+    }
+
+    private function getCreateOrderRequest()
+    {
+        $from_district_id = fn_get_districtGhn($this->_shipping_info['package_info']['origination']['district']);
+        $from_district_name = fn_get_districtNameGhn($this->_shipping_info['package_info']['origination']['district']);
+        $from_ward_code = fn_get_wardGhn($this->_shipping_info['package_info']['origination']['ward']);
+        $from_ward_name = fn_get_wardNameGhn($this->_shipping_info['package_info']['origination']['ward']);
+        $from_address = $this->_shipping_info['package_info']['origination']['address'];
+        
+        $to_district_id = fn_get_districtGhn($this->_shipping_info['package_info']['location']['district']);
+        $to_ward_code = fn_get_wardGhn($this->_shipping_info['package_info']['location']['ward']);
+        $to_address = $this->_shipping_info['package_info']['location']['address'];
+
+        $payment_type_id = $this->_shipping_info['package_info']['PaymentTypeId'];
+        $commment = $this->_shipping_info['package_info']['comments'];
+        $required_note = 'CHOXEMHANGKHONGTHU';
+        $from_name = $this->_shipping_info['package_info']['origination']['name'];
+        $from_phone = $this->_shipping_info['package_info']['origination']['phone'];
+        $from_province_name = fn_get_stateNameGhn($this->_shipping_info['package_info']['origination']['state']);
+        $return_phone = '';
+        $return_address = '';
+        $return_district_id = null;
+        $return_ward_code = '';
+        $client_order_code = $this->_shipping_info['package_info']['OrderCode'];
+        $to_name = $this->_shipping_info['package_info']['location']['firstname'].' '.$this->_shipping_info['package_info']['location']['lastname'];
+        $to_phone = $this->_shipping_info['package_info']['CustomerPhone'];
+        $cod_amount = $this->_shipping_info['package_info']['CollectMoney'];
+        $content = '';
+        $weight = (int)$this->_shipping_info['package_info']['W'];
+        $length = null;
+        $width = null;
+        $height = null;
+        $pick_station_id = null;
+        $deliver_station_id = null;
+        $insurance_value = 0;
+        $service_id = 53320; // Chuẩn
+        $service_type_id = 2;
+        $coupon = null;
+        $pick_shift = array(2);
+        $items = array();
+            
+        foreach($this->_shipping_info['package_info']['products'] as $itemId => $amount){
+            $productInfo = db_get_row("SELECT od.product_code, od.price, od.amount, p.weight, p.length, p.width, p.height, pdesc.product
+                                       FROM ?:order_details od
+                                       LEFT JOIN ?:products p ON p.product_id = od.product_id
+                                       LEFT JOIN ?:product_descriptions pdesc ON pdesc.product_id = p.product_id
+                                       WHERE od.order_id = ?s AND od.item_id = ?s AND pdesc.lang_code = ?s
+                                    "
+                                    , $this->_shipping_info['package_info']['OrderCode']
+                                    , $itemId,
+                                    'vi'
+                                );
+            $items[] = [
+                "name" => $productInfo['product'],
+                "code" => $productInfo['product_code'],
+                "quantity"=> (int)$productInfo['amount'],
+                "price" => (int)$productInfo['price'],
+                "length" => (int)$productInfo['length'],
+                "width" => (int)$productInfo['width'],
+                "height" => (int)$productInfo['height'],
+                "weight" => (int)$productInfo['weight']
+            ];
+        }
+
+        $request = array(
+            'payment_type_id'=> $payment_type_id,
+            "note" =>   $commment,
+            "required_note" => $required_note,
+            "from_name" => $from_name,
+            "from_phone" => $from_phone,
+            "from_address" => $from_address,
+            "from_ward_name" => $from_ward_name,
+            "from_district_name" => $from_district_name,
+            "from_province_name" => $from_province_name,
+            "return_phone" => $return_phone,
+            "return_address" => $return_address,
+            "return_district_id" => $return_district_id,
+            "return_ward_code" => $return_ward_code,
+            "client_order_code" => $client_order_code,
+            "to_name" => $to_name,
+            "to_phone" => $to_phone,
+            "to_address" => $to_address,
+            "to_ward_code" => $to_ward_code,
+            "to_district_id" => $to_district_id,
+            "cod_amount" => (int)$cod_amount,
+            "content" => $content,
+            "weight" => $weight,
+            //"length" => $length,
+            //"width" => $width,
+            //"height" => $height,
+            "pick_station_id" => $pick_station_id,
+            "deliver_station_id" => $deliver_station_id,
+            "insurance_value" => $insurance_value,
+            "service_id" => $service_id,
+            "service_type_id" => $service_type_id,
+            "coupon" => $coupon,
+            //"pick_shift"=> $pick_shift,
+            "items" => $items
+        );
+        return json_encode($request);
+    }
+
+    private function getOrderInfoRequest()
+    {
+        $request = array(
+            'order_code'=> $this->_shipping_info['tracking_number']
+        );
         return json_encode($request);
     }
 

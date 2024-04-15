@@ -19,6 +19,7 @@ use Tygh\Shippings\Shippings;
 use Tygh\Storage;
 use Tygh\Tools\Url;
 use Tygh\Tygh;
+use Tygh\Shippings\RealtimeServices;
 
 defined('BOOTSTRAP') or die('Access denied');
 
@@ -200,6 +201,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             return [CONTROLLER_STATUS_REDIRECT, Url::buildUrn(['orders', 'manage'], $params)];
         }
+    }
+
+    if($mode === 'update_order_info_from_tracking_number'){
+        // get shipment by tracking number
+        $shipment = fn_get_shipment_by_tracking_number($_REQUEST['tracking_number']);
+        if($shipment['carrier'] == 'ghn'){
+            RealtimeServices::clearStack();
+            // get GHN Service
+            $ghn = db_get_row('SELECT shipping_id, service_params FROM ?:shippings WHERE service_id = ?i', 600);
+            $shipping = array(
+                'service_params' =>  unserialize($ghn['service_params']),
+                'module' => 'ghn',
+                'shipping_id' => $ghn['shipping_id'],
+                'tracking_number' => $_REQUEST['tracking_number'],
+                'shipment_id' => $shipment['shipment_id']
+            );
+            $error = RealtimeServices::registerOrderInfo($shipping['shipping_id'], $shipping);
+            if (empty($error)) {
+                $orderGhn = RealtimeServices::getOrderShipment();
+                if ($orderGhn['error'] == false){
+                    // Update status to shipment
+                    $shipment_data = [
+                        'tracking_number' =>  $orderGhn['tracking_number'],
+                        'status' => fn_get_shipment_status_local_form_ghn(orderGhn['status'])
+                    ];
+                    fn_update_shipment($shipment_data, $orderGhn['shipment_id']);
+                }
+            }else{
+                fn_set_notification(NotificationSeverity::ERROR, __('notice'), __('error_shipment_not_created'));
+            }
+        }
+
+        return array(CONTROLLER_STATUS_REDIRECT, $_REQUEST['tracking_number']);
     }
 
     return [CONTROLLER_STATUS_OK, 'orders' . $suffix];

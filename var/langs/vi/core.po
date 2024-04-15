@@ -11410,8 +11410,8 @@ msgid "No shipments found"
 msgstr "No shipments found"
 
 msgctxt "Languages::text_no_shipping_methods"
-msgid "Sorry, it seems that we have no shipping options available for your location.<br/>Please check your shipping address and contact us if everything is okay. We'll see what we can do about it."
-msgstr "Sorry, it seems that we have no shipping options available for your location.<br/>Please check your shipping address and contact us if everything is okay. We'll see what we can do about it."
+msgid "Vui lòng chọn địa chỉ nhận hàng của bạn và sau đó chọn phương thức chuyển hàng"
+msgstr "Vui lòng chọn địa chỉ nhận hàng của bạn và sau đó chọn phương thức chuyển hàng"
 
 msgctxt "Languages::text_no_upgrades_available"
 msgid "No upgrades currently available"
@@ -19787,8 +19787,8 @@ msgid "Deliver to:"
 msgstr "Deliver to:"
 
 msgctxt "Languages::lite_checkout.click_here_to_update_shipping"
-msgid "Enter city and state and click here to update shipping rates"
-msgstr "Enter city and state and click here to update shipping rates"
+msgid "Nhập vào khu vực nhận hàng của bạn và nhấn chuột tại đây để cập nhật giá vận chuyển."
+msgstr "Nhập vào khu vực nhận hàng của bạn và nhấn chuột tại đây để cập nhật giá vận chuyển."
 
 msgctxt "Languages::lite_checkout.shipping_method_for"
 msgid "Shipping method for [group_name]"

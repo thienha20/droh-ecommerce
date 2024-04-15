@@ -8316,6 +8316,14 @@ function fn_get_shipments_info($params, $items_per_page = 0)
     return array($shipments, $params);
 }
 
+function fn_get_shipment_by_tracking_number($tracking_number){
+    $shipment = db_get_row(
+        "SELECT DISTINCT a.*, b.order_id FROM ?:shipments a LEFT JOIN ?:shipment_items b ON b.shipment_id = a.shipment_id WHERE tracking_number = ?s",
+        $tracking_number
+    );
+    return $shipment;
+}
+
 /**
  * Verification that at least one product was chosen.
  *
@@ -8525,6 +8533,15 @@ function fn_update_shipment($shipment_data, $shipment_id = 0, $group_key = 0, $a
 
     }
 
+    return $shipment_id;
+}
+
+function fn_update_tracking_number_for_shipment($shipment_id = 0, $tracking_number = ''){
+    $arow = db_query("UPDATE ?:shipments SET tracking_number = ?s WHERE shipment_id = ?i", $tracking_number, $shipment_id);
+    if ($arow === false) {
+        fn_set_notification('E', __('error'), __('object_not_found', array('[object]' => __('shipment'))),'','404');
+        $shipment_id = false;
+    }
     return $shipment_id;
 }
 
