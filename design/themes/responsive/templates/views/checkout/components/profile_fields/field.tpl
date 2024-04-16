@@ -2,7 +2,7 @@
     data-ca-error-message-target-method="append">
     {if $field.field_type == "ProfileFieldTypes::STATE"|enum}
         {$_country = $settings.Checkout.default_country}
-        {$_state = $field_value|default:$settings.Checkout.default_state}
+        {$_state = $user_data.s_state|default:$settings.Checkout.default_state}
 
         <select {if $field.autocomplete_type}x-autocompletetype="{$field.autocomplete_type}"{/if}
             id="{$field_id}"
@@ -117,7 +117,7 @@
         {/foreach}
     {elseif $field.field_type == "ProfileFieldTypes::SELECT_BOX"|enum}
         {if $field.field_name == 's_district'}
-            {$state = $user_data.s_state}
+            {$state = $user_data.s_state|default: $_state}
             {$district = $user_data.s_district}
             <select data-ca-lite-checkout-field="user_data.s_district"
                     class="cm-district cm-location-shipping litecheckout__input litecheckout__input--selectable litecheckout__input--selectable--select"
@@ -145,6 +145,43 @@
                     id="litecheckout_ward"
             >
                 <option disabled data-ca-rebuild-wards="skip" {if !$ward}selected{/if}>{__("select_ward")}</option>
+                {foreach $field.values[$district] as $district_ward}
+                    <option value="{$district_ward.code}"
+                            {if $district_ward.code === $ward}selected{/if}
+                    >{$district_ward.ward}</option>
+                {/foreach}
+            </select>
+        {elseif $field.field_name == 'b_district'}
+            {$state = $field_value|default:$settings.Checkout.default_state}
+            {$district = $field_value|default:$settings.Checkout.default_district}
+            <select data-ca-lite-checkout-field="user_data.b_district"
+                    class="cm-district cm-location-billing litecheckout__input litecheckout__input--selectable litecheckout__input--selectable--select"
+                    data-ca-lite-checkout-element="b-district"
+                    data-ca-lite-checkout-is-district-code-container="true"
+                    data-ca-lite-checkout-last-value="{$district}"
+                    id="litecheckout_b_district"
+                    name="user_data[b_district]"
+            >
+                <option {if !$district}selected{/if}>{__("select_district")}</option>
+                {foreach $field.values[$state] as $state_district}
+                    <option value="{$state_district.code}"
+                            {if $state_district.code === $district}selected{/if}
+                    >{$state_district.district}</option>
+                {/foreach}
+            </select>
+        {elseif $field.field_name == 'b_ward'}
+            {$state = $user_data.b_state}
+            {$district = $user_data.b_district}
+            {$ward = $user_data.b_ward}
+            <select data-ca-lite-checkout-field="user_data.b_ward"
+                    class="cm-district cm-location-billing litecheckout__input litecheckout__input--selectable litecheckout__input--selectable--select"
+                    data-ca-lite-checkout-element="b-ward"
+                    data-ca-lite-checkout-is-ward-code-container="true"
+                    data-ca-lite-checkout-last-value="{$ward}"
+                    id="litecheckout_b_ward"
+                    name="user_data[b_ward]"
+            >
+                <option {if !$ward}selected{/if}>{__("select_ward")}</option>
                 {foreach $field.values[$district] as $district_ward}
                     <option value="{$district_ward.code}"
                             {if $district_ward.code === $ward}selected{/if}

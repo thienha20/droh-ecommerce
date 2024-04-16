@@ -9029,6 +9029,18 @@ msgctxt "Languages::select_country"
 msgid "Select country"
 msgstr "Select country"
 
+msgctxt "Languages::select_state"
+msgid "Chọn Tỉnh Thành"
+msgstr "Chọn Tỉnh Thành"
+
+msgctxt "Languages::select_district"
+msgid "Chọn Quận/Huyện"
+msgstr "Chọn Quận/Huyện"
+
+msgctxt "Languages::select_ward"
+msgid "Chọn Phường/Xã"
+msgstr "Chọn Phường/Xã"
+
 msgctxt "Languages::select_customer"
 msgid "Select customer"
 msgstr "Select customer"

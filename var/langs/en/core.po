@@ -9029,6 +9029,14 @@ msgctxt "Languages::select_country"
 msgid "Select country"
 msgstr "Select country"
 
+msgctxt "Languages::select_district"
+msgid "Select District"
+msgstr "Select District"
+
+msgctxt "Languages::select_ward"
+msgid "Select Ward"
+msgstr "Select Ward"
+
 msgctxt "Languages::select_customer"
 msgid "Select customer"
 msgstr "Select customer"

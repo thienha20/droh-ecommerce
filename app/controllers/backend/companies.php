@@ -459,6 +459,8 @@ if ($mode == 'manage') {
         'search'    => $search,
         'countries' => fn_get_simple_countries(true, CART_LANGUAGE),
         'states'    => fn_get_all_states(),
+        'districts' => fn_get_all_districts(),
+        'wards'     => fn_get_all_wards()
     ]);
 
     if (fn_allowed_for('ULTIMATE')) {
@@ -660,6 +662,8 @@ if ($mode == 'manage') {
     Tygh::$app['view']->assign('company_data', $company_data);
     Tygh::$app['view']->assign('countries', fn_get_simple_countries(true, CART_LANGUAGE));
     Tygh::$app['view']->assign('states', fn_get_all_states());
+    Tygh::$app['view']->assign('districts', fn_get_all_districts());
+    Tygh::$app['view']->assign('wards', fn_get_all_wards());
 
     $params = array(
         'get_custom'           => true,
@@ -731,6 +735,8 @@ if ($mode == 'manage') {
 
     Tygh::$app['view']->assign('countries', fn_get_simple_countries(true, CART_LANGUAGE));
     Tygh::$app['view']->assign('states', fn_get_all_states());
+    Tygh::$app['view']->assign('districts', fn_get_all_districts());
+    Tygh::$app['view']->assign('wards', fn_get_all_wards());
 
     Tygh::$app['view']->display('pickers/companies/picker_contents.tpl');
     exit;
@@ -765,6 +771,8 @@ if (fn_allowed_for('MULTIVENDOR')) {
         Tygh::$app['view']->assign('search', $search);
         Tygh::$app['view']->assign('countries', fn_get_simple_countries(true, CART_LANGUAGE));
         Tygh::$app['view']->assign('states', fn_get_all_states());
+        Tygh::$app['view']->assign('districts', fn_get_all_districts());
+        Tygh::$app['view']->assign('wards', fn_get_all_wards());
 
     } elseif ($mode == 'balance') {
 
