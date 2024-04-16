@@ -417,7 +417,6 @@
       var $billing_districts = methods.getElement('b-district', true);
       var $billing_wards = methods.getElement('b-ward', true);
 
-    
       $city.on('focus', function (e) {
         if ($(this).val() !== '') {
           return;
