@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21, created on 2024-03-27 09:55:05
+<?php /* Smarty version Smarty-3.1.21, created on 2024-04-10 15:53:59
          compiled from "C:\wamp64\www\cscart\design\themes\responsive\templates\blocks\currencies.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:20117055426603c2c9995ed0-63334850%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2038496666661653a7d85c49-20686702%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'tygh',
     ),
   ),
-  'nocache_hash' => '20117055426603c2c9995ed0-63334850',
+  'nocache_hash' => '2038496666661653a7d85c49-20686702',
   'function' => 
   array (
   ),
@@ -33,9 +33,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21',
-  'unifunc' => 'content_6603c2c9bddb04_13629981',
+  'unifunc' => 'content_661653a7de1b45_78276788',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_6603c2c9bddb04_13629981')) {function content_6603c2c9bddb04_13629981($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_count')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\modifier.count.php';
+<?php if ($_valid && !is_callable('content_661653a7de1b45_78276788')) {function content_661653a7de1b45_78276788($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_count')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\modifier.count.php';
 if (!is_callable('smarty_function_set_id')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.set_id.php';
 ?><?php if ($_smarty_tpl->tpl_vars['runtime']->value['customization_mode']['design']=="Y"&&(defined('AREA') ? constant('AREA') : null)=="C") {
 $_smarty_tpl->_capture_stack[0][] = array("template_content", null, null); ob_start(); ?><div id="currencies_<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['block']->value['block_id'], ENT_QUOTES, 'UTF-8');?>

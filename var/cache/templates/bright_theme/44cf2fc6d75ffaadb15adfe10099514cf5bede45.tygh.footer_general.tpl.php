@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21, created on 2024-03-27 09:55:10
+<?php /* Smarty version Smarty-3.1.21, created on 2024-04-10 15:54:02
          compiled from "C:\wamp64\www\cscart\design\themes\responsive\templates\blocks\wrappers\footer_general.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:19727304266603c2ce443f86-01290934%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2066378855661653aac5dc58-95386386%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'tygh',
     ),
   ),
-  'nocache_hash' => '19727304266603c2ce443f86-01290934',
+  'nocache_hash' => '2066378855661653aac5dc58-95386386',
   'function' => 
   array (
   ),
@@ -29,9 +29,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21',
-  'unifunc' => 'content_6603c2ce570654_55820532',
+  'unifunc' => 'content_661653aad08925_39353720',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_6603c2ce570654_55820532')) {function content_6603c2ce570654_55820532($_smarty_tpl) {?><?php if (!is_callable('smarty_block_hook')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\block.hook.php';
+<?php if ($_valid && !is_callable('content_661653aad08925_39353720')) {function content_661653aad08925_39353720($_smarty_tpl) {?><?php if (!is_callable('smarty_block_hook')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\block.hook.php';
 if (!is_callable('smarty_function_include_ext')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.include_ext.php';
 if (!is_callable('smarty_function_set_id')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.set_id.php';
 ?><?php if ($_smarty_tpl->tpl_vars['runtime']->value['customization_mode']['design']=="Y"&&(defined('AREA') ? constant('AREA') : null)=="C") {

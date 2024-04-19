@@ -14,4 +14,11 @@
 
 if (!defined('BOOTSTRAP')) { die('Access denied'); }
 
-//fn_register_hooks();
+fn_register_hooks(
+    'checkout_update_steps_before_update_user_data',
+    'form_cart',
+    'repay_order',
+    'update_cart_by_data_post',
+    'create_order',
+    'update_order'
+);

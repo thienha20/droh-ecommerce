@@ -1132,6 +1132,7 @@ function fn_update_order(&$cart, $order_id = 0)
             }
         }
     }
+//    fn_print_die($order);
 
     if (empty($order_id)) {
         if (!SiteArea::isStorefront(AREA) && isset($cart['user_data']['lang_code'])) {

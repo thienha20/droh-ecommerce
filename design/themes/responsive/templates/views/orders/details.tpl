@@ -43,6 +43,24 @@
 
 
         {capture name="group"}
+            {*Customer invoice VAT*}
+            {if $order_info.invoice_vat}
+                <div class="ty-orders-notes" style="margin-bottom: 20px">
+                    {include file="common/subheader.tpl" title=__("invoice_vat")}
+                    <div class="ty-orders-notes__body">
+                        {foreach from=$order_info.invoice_vat|json_decode item=item key=key}
+                            <div class="ty-control-group">
+                                <label class="ty-control-group__label ty-product-options__item-label" style="width: 100px;text-align: left">
+                                    <strong>{if $key == 'code'}{__('vat_code')}{else}{__($key)}{/if}</strong></label>
+                                <div class="ty-control-group__item">
+                                    {$item}
+                                </div>
+                            </div>
+                        {/foreach}
+                    </div>
+                </div>
+            {/if}
+            {*/Customer invoice VAT*}
 
             {include file="common/subheader.tpl" title=__("products_information")}
 

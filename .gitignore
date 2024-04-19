@@ -9,8 +9,10 @@
 .project
 nbproject
 Thumbs.db
-robots.txt!/.htaccess
+robots.txt
+!/.htaccess
 /var/cache/*
 /var/snapshots/*
 /images/*
 /var/files/*
+/upgrades

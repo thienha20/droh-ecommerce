@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21, created on 2024-03-27 09:55:07
+<?php /* Smarty version Smarty-3.1.21, created on 2024-04-10 15:54:00
          compiled from "C:\wamp64\www\cscart\design\themes\responsive\templates\views\block_manager\render\wrapper.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:21001419796603c2cb4a4001-15048172%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:330134650661653a838a559-96000520%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'tygh',
     ),
   ),
-  'nocache_hash' => '21001419796603c2cb4a4001-15048172',
+  'nocache_hash' => '330134650661653a838a559-96000520',
   'function' => 
   array (
   ),
@@ -25,9 +25,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21',
-  'unifunc' => 'content_6603c2cb4d7874_13064359',
+  'unifunc' => 'content_661653a83a0604_90882911',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_6603c2cb4d7874_13064359')) {function content_6603c2cb4d7874_13064359($_smarty_tpl) {?><?php if (!is_callable('smarty_function_set_id')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.set_id.php';
+<?php if ($_valid && !is_callable('content_661653a83a0604_90882911')) {function content_661653a83a0604_90882911($_smarty_tpl) {?><?php if (!is_callable('smarty_function_set_id')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.set_id.php';
 ?><?php if ($_smarty_tpl->tpl_vars['runtime']->value['customization_mode']['design']=="Y"&&(defined('AREA') ? constant('AREA') : null)=="C") {
 $_smarty_tpl->_capture_stack[0][] = array("template_content", null, null); ob_start();
 if ($_smarty_tpl->tpl_vars['runtime']->value['customization_mode']['block_manager']&&$_smarty_tpl->tpl_vars['location_data']->value['is_frontend_editing_allowed']) {?>

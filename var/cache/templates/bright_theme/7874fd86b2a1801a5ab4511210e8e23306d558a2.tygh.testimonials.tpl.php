@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21, created on 2024-03-27 10:08:31
+<?php /* Smarty version Smarty-3.1.21, created on 2024-04-10 16:01:01
          compiled from "C:\wamp64\www\cscart\design\themes\bright_theme\templates\addons\discussion\blocks\testimonials.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:11335241786603c308739804-76897965%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1828334866616554d553519-99917489%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,12 +11,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'tygh',
     ),
   ),
-  'nocache_hash' => '11335241786603c308739804-76897965',
+  'nocache_hash' => '1828334866616554d553519-99917489',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21',
-  'unifunc' => 'content_6603c30887db38_42691678',
   'variables' => 
   array (
     'runtime' => 0,
@@ -27,8 +25,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'auth' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21',
+  'unifunc' => 'content_6616554d5fab03_33594892',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_6603c30887db38_42691678')) {function content_6603c30887db38_42691678($_smarty_tpl) {?><?php if (!is_callable('smarty_block_hook')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\block.hook.php';
+<?php if ($_valid && !is_callable('content_6616554d5fab03_33594892')) {function content_6616554d5fab03_33594892($_smarty_tpl) {?><?php if (!is_callable('smarty_block_hook')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\block.hook.php';
 if (!is_callable('smarty_modifier_date_format')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\modifier.date_format.php';
 if (!is_callable('smarty_function_cycle')) include 'C:\\wamp64\\www\\cscart\\app\\lib\\vendor\\smarty\\smarty\\libs\\plugins\\function.cycle.php';
 if (!is_callable('smarty_function_set_id')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.set_id.php';

@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21, created on 2024-03-27 10:08:29
+<?php /* Smarty version Smarty-3.1.21, created on 2024-04-10 15:53:57
          compiled from "C:\wamp64\www\cscart\design\themes\responsive\templates\addons\seo\hooks\index\meta_description.override.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:3006857056603c3058931b6-30159085%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1255631723661653a583bdd4-28887222%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,12 +11,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'tygh',
     ),
   ),
-  'nocache_hash' => '3006857056603c3058931b6-30159085',
+  'nocache_hash' => '1255631723661653a583bdd4-28887222',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21',
-  'unifunc' => 'content_6603c305976e06_15707232',
   'variables' => 
   array (
     'runtime' => 0,
@@ -26,8 +24,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'auth' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21',
+  'unifunc' => 'content_661653a585c7b7_81232588',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_6603c305976e06_15707232')) {function content_6603c305976e06_15707232($_smarty_tpl) {?><?php if (!is_callable('smarty_function_set_id')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.set_id.php';
+<?php if ($_valid && !is_callable('content_661653a585c7b7_81232588')) {function content_661653a585c7b7_81232588($_smarty_tpl) {?><?php if (!is_callable('smarty_function_set_id')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.set_id.php';
 ?><?php if ($_smarty_tpl->tpl_vars['runtime']->value['customization_mode']['design']=="Y"&&(defined('AREA') ? constant('AREA') : null)=="C") {
 $_smarty_tpl->_capture_stack[0][] = array("template_content", null, null); ob_start();
 if ($_smarty_tpl->tpl_vars['search']->value&&($_smarty_tpl->tpl_vars['meta_description']->value||$_smarty_tpl->tpl_vars['location_data']->value['meta_description'])) {?>

@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21, created on 2024-03-27 10:08:31
+<?php /* Smarty version Smarty-3.1.21, created on 2024-04-10 16:00:51
          compiled from "C:\wamp64\www\cscart\design\themes\responsive\templates\addons\product_reviews\views\product_reviews\components\product_reviews_stars.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:16156995536603c5ef72a7a2-36364487%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:46200163866165543c0ce48-86126390%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'tygh',
     ),
   ),
-  'nocache_hash' => '16156995536603c5ef72a7a2-36364487',
+  'nocache_hash' => '46200163866165543c0ce48-86126390',
   'function' => 
   array (
   ),
@@ -36,9 +36,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21',
-  'unifunc' => 'content_6603c5ef795943_94128508',
+  'unifunc' => 'content_66165543c839a1_73573788',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_6603c5ef795943_94128508')) {function content_6603c5ef795943_94128508($_smarty_tpl) {?><?php if (!is_callable('smarty_function_set_id')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.set_id.php';
+<?php if ($_valid && !is_callable('content_66165543c839a1_73573788')) {function content_66165543c839a1_73573788($_smarty_tpl) {?><?php if (!is_callable('smarty_function_set_id')) include 'C:/wamp64/www/cscart/app/functions/smarty_plugins\\function.set_id.php';
 ?><?php
 \Tygh\Languages\Helper::preloadLangVars(array('product_reviews.product_is_rated_n_out_of_five_stars','product_reviews.show_rating','product_reviews.click_to_see_reviews','product_reviews.product_is_rated_n_out_of_five_stars','product_reviews.show_rating','product_reviews.click_to_see_reviews'));
 ?>
@@ -59,11 +59,11 @@ $_smarty_tpl->_capture_stack[0][] = array("template_content", null, null); ob_st
     <?php if ($_smarty_tpl->tpl_vars['link']->value) {?>
         <?php ob_start();
 echo $_smarty_tpl->__("product_reviews.show_rating");
-$_tmp5=ob_get_clean();?><?php $_smarty_tpl->tpl_vars['title'] = new Smarty_variable(((string)$_smarty_tpl->tpl_vars['title']->value).". ".$_tmp5.".", null, 0);?>
+$_tmp11=ob_get_clean();?><?php $_smarty_tpl->tpl_vars['title'] = new Smarty_variable(((string)$_smarty_tpl->tpl_vars['title']->value).". ".$_tmp11.".", null, 0);?>
     <?php } elseif ($_smarty_tpl->tpl_vars['button']->value) {?>
         <?php ob_start();
 echo $_smarty_tpl->__("product_reviews.click_to_see_reviews");
-$_tmp6=ob_get_clean();?><?php $_smarty_tpl->tpl_vars['title'] = new Smarty_variable(((string)$_smarty_tpl->tpl_vars['title']->value).". ".$_tmp6.".", null, 0);?>
+$_tmp12=ob_get_clean();?><?php $_smarty_tpl->tpl_vars['title'] = new Smarty_variable(((string)$_smarty_tpl->tpl_vars['title']->value).". ".$_tmp12.".", null, 0);?>
     <?php }?>
     <?php if ($_smarty_tpl->tpl_vars['link']->value===true) {?>
         <?php $_smarty_tpl->tpl_vars['link'] = new Smarty_variable("products.view?product_id=".((string)$_smarty_tpl->tpl_vars['product']->value['product_id'])."&selected_section=product_reviews#product_reviews", null, 0);?>
@@ -143,11 +143,11 @@ echo Smarty::$_smarty_vars['capture']['template_content'];
     <?php if ($_smarty_tpl->tpl_vars['link']->value) {?>
         <?php ob_start();
 echo $_smarty_tpl->__("product_reviews.show_rating");
-$_tmp7=ob_get_clean();?><?php $_smarty_tpl->tpl_vars['title'] = new Smarty_variable(((string)$_smarty_tpl->tpl_vars['title']->value).". ".$_tmp7.".", null, 0);?>
+$_tmp13=ob_get_clean();?><?php $_smarty_tpl->tpl_vars['title'] = new Smarty_variable(((string)$_smarty_tpl->tpl_vars['title']->value).". ".$_tmp13.".", null, 0);?>
     <?php } elseif ($_smarty_tpl->tpl_vars['button']->value) {?>
         <?php ob_start();
 echo $_smarty_tpl->__("product_reviews.click_to_see_reviews");
-$_tmp8=ob_get_clean();?><?php $_smarty_tpl->tpl_vars['title'] = new Smarty_variable(((string)$_smarty_tpl->tpl_vars['title']->value).". ".$_tmp8.".", null, 0);?>
+$_tmp14=ob_get_clean();?><?php $_smarty_tpl->tpl_vars['title'] = new Smarty_variable(((string)$_smarty_tpl->tpl_vars['title']->value).". ".$_tmp14.".", null, 0);?>
     <?php }?>
     <?php if ($_smarty_tpl->tpl_vars['link']->value===true) {?>
         <?php $_smarty_tpl->tpl_vars['link'] = new Smarty_variable("products.view?product_id=".((string)$_smarty_tpl->tpl_vars['product']->value['product_id'])."&selected_section=product_reviews#product_reviews", null, 0);?>
