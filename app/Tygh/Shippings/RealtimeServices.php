@@ -43,6 +43,13 @@ class RealtimeServices
      */
     private static $_rates = array();
 
+    /**
+     * Result Order Shipment
+     *
+     * @var array $_orderShipment
+     */
+    private static $_orderShipment = array();
+
     private static function _processErrorCode($code, $placeholders = array())
     {
         return __($code, $placeholders);
@@ -96,6 +103,54 @@ class RealtimeServices
             }
 
             $service->prepareData($shipping_info);
+
+            self::$_services_stack[$shipping_key] = $service;
+            self::$module[$shipping_key] = $shipping_info['module'];
+        } else {
+            return self::_processErrorCode(self::SERVICE_NOT_FOUND);
+        }
+
+        return self::_processErrorCode(self::SERVICE_NOT_ERROR);
+    }
+
+    public static function registerCreateOrder($shipping_key, $shipping_info)
+    {
+        if (empty($shipping_info['service_params'])) {
+            return self::_processErrorCode(self::SERVICE_NOT_CONFIGURED);
+        }
+
+        $module = fn_camelize($shipping_info['module']);
+        $module = 'Tygh\\Shippings\\Services\\' . $module;
+
+        if (class_exists($module)) {
+            /** @var \Tygh\Shippings\IService $service */
+            $service = new $module;
+
+            $service->prepareDataCreateOrder($shipping_info);
+
+            self::$_services_stack[$shipping_key] = $service;
+            self::$module[$shipping_key] = $shipping_info['module'];
+        } else {
+            return self::_processErrorCode(self::SERVICE_NOT_FOUND);
+        }
+
+        return self::_processErrorCode(self::SERVICE_NOT_ERROR);
+    }
+
+    public static function registerOrderinfo($shipping_key, $shipping_info)
+    {
+        if (empty($shipping_info['service_params'])) {
+            return self::_processErrorCode(self::SERVICE_NOT_CONFIGURED);
+        }
+
+        $module = fn_camelize($shipping_info['module']);
+        $module = 'Tygh\\Shippings\\Services\\' . $module;
+
+        if (class_exists($module)) {
+            /** @var \Tygh\Shippings\IService $service */
+            $service = new $module;
+
+            $service->prepareDataOrderInfo($shipping_info);
 
             self::$_services_stack[$shipping_key] = $service;
             self::$module[$shipping_key] = $shipping_info['module'];
@@ -167,6 +222,100 @@ class RealtimeServices
         return self::$_rates;
     }
 
+    public static function createOrderShipment()
+    {
+        $_services = [
+            'multi'  => [],
+            'simple' => [],
+        ];
+
+        if (empty(self::$_services_stack)) {
+            return [];
+        }
+
+        if (self::_checkMultithreading()) {
+            foreach (self::$_services_stack as $shipping_key => $service_object) {
+                $key = 'simple';
+                if ($service_object->allowMultithreading()) {
+                    $key = 'multi';
+                }
+
+                $_services[$key][$shipping_key] = $service_object;
+            }
+
+        } else {
+            $_services['simple'] = self::$_services_stack;
+        }
+
+        if (!empty($_services['multi'])) {
+            foreach ($_services['multi'] as $shipping_key => $service_object) {
+                self::$request_data[$shipping_key] = $data = $service_object->getRequestDataCreateOrder();
+
+                $extra = [
+                    'callback'          => ['\Tygh\Shippings\RealtimeServices::multithreadingCallbackCreateOrder', $shipping_key],
+                    'headers'           => !empty($data['headers']) ? $data['headers'] : [],
+                    'timeout'           => !empty($data['timeout']) ? $data['timeout'] : null,
+                    'execution_timeout' => !empty($data['execution_timeout']) ? $data['execution_timeout'] : null,
+                ];
+                if ($data['method'] == 'post') {
+                    Http::mpost($data['url'], $data['data'], $extra);
+                } else {
+                    Http::mget($data['url'], $data['data'], $extra);
+                }
+            }
+
+            Http::processMultiRequest();
+        }
+        return self::$_orderShipment;
+    }
+
+    public static function getOrderShipment()
+    {
+        $_services = [
+            'multi'  => [],
+            'simple' => [],
+        ];
+
+        if (empty(self::$_services_stack)) {
+            return [];
+        }
+
+        if (self::_checkMultithreading()) {
+            foreach (self::$_services_stack as $shipping_key => $service_object) {
+                $key = 'simple';
+                if ($service_object->allowMultithreading()) {
+                    $key = 'multi';
+                }
+
+                $_services[$key][$shipping_key] = $service_object;
+            }
+
+        } else {
+            $_services['simple'] = self::$_services_stack;
+        }
+
+        if (!empty($_services['multi'])) {
+            foreach ($_services['multi'] as $shipping_key => $service_object) {
+                self::$request_data[$shipping_key] = $data = $service_object->getRequestDataOrderInfo();
+
+                $extra = [
+                    'callback'          => ['\Tygh\Shippings\RealtimeServices::multithreadingCallbackOrderInfo', $shipping_key],
+                    'headers'           => !empty($data['headers']) ? $data['headers'] : [],
+                    'timeout'           => !empty($data['timeout']) ? $data['timeout'] : null,
+                    'execution_timeout' => !empty($data['execution_timeout']) ? $data['execution_timeout'] : null,
+                ];
+                if ($data['method'] == 'post') {
+                    Http::mpost($data['url'], $data['data'], $extra);
+                } else {
+                    Http::mget($data['url'], $data['data'], $extra);
+                }
+            }
+
+            Http::processMultiRequest();
+        }
+        return self::$_orderShipment;
+    }
+
     public static function multithreadingCallback($result, $shipping_key)
     {
         $service = self::$_services_stack[$shipping_key];
@@ -207,6 +356,35 @@ class RealtimeServices
             'delivery_time'  => isset($rate['delivery_time']) ? $rate['delivery_time'] : false,
             'destination_id' => isset($rate['destination_id']) ? $rate['destination_id'] : false,
             'pickup_info'    => $rate['pickup_info'],
+        ];
+    }
+
+    public static function multithreadingCallbackCreateOrder($result, $shipping_key)
+    {
+        $service = self::$_services_stack[$shipping_key];
+        $orderShipment = $service->processResponseCreateOrder($result);
+
+        self::$_orderShipment = [
+            'shipment_id'          => $orderShipment['shipment_id'],
+            'error'          => $orderShipment['error'],
+            'tracking_number'   => $orderShipment['tracking_number'],
+            'order_id'  => $orderShipment['order_id'],
+            'total_fee' => $orderShipment['total_fee'],
+            'expected_delivery_time' => $orderShipment['expected_delivery_time']
+        ];
+    }
+
+    public static function multithreadingCallbackOrderInfo($result, $shipping_key)
+    {
+        $service = self::$_services_stack[$shipping_key];
+        $orderShipment = $service->processResponseOrderInfo($result);
+
+        self::$_orderShipment = [
+            'shipment_id'          => $orderShipment['shipment_id'],
+            'error'          => $orderShipment['error'],
+            'tracking_number'   => $orderShipment['tracking_number'],
+            'order_id'  => $orderShipment['order_id'],
+            'status' => $orderShipment['status']
         ];
     }
 

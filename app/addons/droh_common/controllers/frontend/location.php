@@ -52,6 +52,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo $list_ward;
         exit();
     }
+    if ($mode == 'state_districts') {
+        // get districts
+        $state_code = !empty($_REQUEST['state_code']) ? $_REQUEST['state_code'] : '';
+        $list_district = fn_get_districts_by_state($state_code);
+        $list_district = !empty($list_district) ? json_encode(['list_district' => $list_district, "status" => "success"]) : '';
+        echo $list_district;
+        exit();
+    }
+    if ($mode == 'district_wards') {
+        // get wards
+        $district_code = !empty($_REQUEST['district_code']) ? $_REQUEST['district_code'] : '';
+        $list_ward = fn_get_wards_by_district($district_code);
+        $list_ward = !empty($list_ward) ? json_encode(['list_ward' => $list_ward, "status" => "success"]) : '';
+        echo $list_ward;
+        exit();
+    }
 
 //    return array(CONTROLLER_STATUS_OK, 'b2b_manage' . $suffix);
 }

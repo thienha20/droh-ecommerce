@@ -1,3 +1,4 @@
+{script src="js/tygh/backend/order_details.js"}
 {if $order_info.shipping}
     {foreach from=$order_info.shipping item="shipping" key="shipping_id" name="f_shipp"}
         {if "shipments.add"|fn_check_view_permissions}
@@ -346,6 +347,9 @@
                                                 <input type="hidden" name="update_shipping[{$shipping.group_key}][{$shipment.shipment_id}][shipping_id]" value="{$shipping.shipping_id}" />
                                                 <input type="hidden" name="update_shipping[{$shipping.group_key}][{$shipment.shipment_id}][carrier]" value="{$shipment.carrier}" />
                                             </div>
+                                        </div>
+                                        <div class="controls">
+                                        <button class = "btn_update_order_info" id = "btn_update_order_info" name = "btn_update_order_info" type="button">Update Shipment Status</button>
                                         </div>
                                     </div>
                                     {/hook}

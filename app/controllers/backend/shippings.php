@@ -103,6 +103,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     'city'    => $settings['company_city'],
                     'country' => $settings['company_country'],
                     'state'   => $settings['company_state'],
+                    'district'=> $settings['company_district'],
+                    'ward'    => $settings['company_ward'],
                     'zipcode' => $settings['company_zipcode'],
                 ];
             }

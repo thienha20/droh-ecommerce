@@ -219,6 +219,96 @@ function fn_get_states($params = [], $items_per_page = 0, $lang_code = CART_LANG
 }
 
 /**
+ * Gets districts list
+ *
+ * @param array  $params         search params
+ * @param int    $items_per_page number of districts per page. Gets all if zero
+ * @param string $lang_code      language code
+ *
+ * @return array 2 elements array, first - found districts, second - filtered input params
+ */
+function fn_get_districts_paging($params = [], $items_per_page = 0, $lang_code = CART_LANGUAGE)
+{
+    $default_params = [
+        'page'           => 1,
+        'items_per_page' => $items_per_page,
+    ];
+
+    /**
+     * Change parameters for getting districts list
+     *
+     * @param array  $params         Params list
+     * @param int    $items_per_page States per page
+     * @param string $lang_code      Language code
+     * @param array  $default_params Default params
+     */
+    fn_set_hook('get_districts_pre', $params,  $items_per_page, $lang_code, $default_params);
+
+    $params = array_merge($default_params, $params);
+
+    $fields = ['a.district_id', 'a.country_code', 'a.code', 'a.status', 'b.name as district', 'c.country', 'f.state'];
+    $joins = [
+        'district_desc'   => db_quote('LEFT JOIN ?:district_descriptions as b ON b.district_id = a.district_id AND b.lang_code = ?s', $lang_code),
+        'country_desc' => db_quote('LEFT JOIN ?:country_descriptions as c ON c.code = a.country_code AND c.lang_code = ?s', $lang_code),
+        'states' => db_quote('LEFT JOIN ?:states as e ON e.code = a.state_code'),
+        'state_desc' => db_quote('LEFT JOIN ?:state_descriptions as f ON f.state_id = e.state_id AND f.lang_code = ?s', $lang_code)
+    ];
+
+    $condition = 'WHERE 1=1';
+    if (!empty($params['only_avail'])) {
+        $condition .= db_quote(' AND a.status = ?s', 'A');
+    }
+    if (!empty($params['q'])) {
+        $condition .= db_quote(' AND f.state LIKE ?l', '%' . $params['q'] . '%');
+    }
+    if (!empty($params['d'])) {
+        $condition .= db_quote(' AND b.name LIKE ?l', '%' . $params['q'] . '%');
+    }
+    if (!empty($params['country_code'])) {
+        $condition .= db_quote(' AND a.country_code = ?s', $params['country_code']);
+    }
+
+    $sorting = 'ORDER BY c.country, f.state, b.name';
+    $limit = $group = '';
+    if (!empty($params['items_per_page'])) {
+        $params['total_items'] = db_get_field('SELECT count(*) FROM ?:districts as a ?p', $condition);
+        $limit = db_paginate($params['page'], $params['items_per_page'], $params['total_items']);
+    }
+
+    /**
+     * Prepare params for getting districts SQL query
+     *
+     * @param array  $params         Params list
+     * @param int    $items_per_page districts per page
+     * @param string $lang_code      Language code
+     * @param array  $fields         Fields list
+     * @param array  $joins          Joins list
+     * @param string $condition      Conditions query
+     * @param string $group          Group condition
+     * @param string $sorting        Sorting condition
+     * @param string $limit          Limit condition
+     */
+    fn_set_hook('fn_get_districts_paging', $params, $items_per_page, $lang_code, $fields, $joins, $condition, $group, $sorting, $limit);
+
+    $districts = db_get_array(
+        'SELECT ' . implode(', ', $fields) . ' FROM ?:districts as a ?p ?p ?p ?p ?p',
+        implode(' ', $joins), $condition, $group, $sorting, $limit
+    );
+
+    /**
+     * Actions after districts list was prepared
+     *
+     * @param array  $params         Params list
+     * @param int    $items_per_page districts per page
+     * @param string $lang_code      Language code
+     * @param array  $districts         List of selected districts
+     */
+    fn_set_hook('get_districts_post', $params,  $items_per_page, $lang_code, $districts);
+
+    return array($districts, $params);
+}
+
+/**
  * Gets states list for the country
  *
  * @param string $country_code country code
@@ -237,6 +327,24 @@ function fn_get_country_states($country_code, $avail_only = true, $lang_code = C
 }
 
 /**
+ * Gets district list for the state
+ *
+ * @param string $state_code state code
+ * @param bool $avail_only if set to true - gets only enabled states
+ * @param string $lang_code language code
+ * @return array key-value array with state code as key and name as value
+ */
+function fn_get_state_districts($state_code, $avail_only = true, $lang_code = CART_LANGUAGE)
+{
+    $condition = db_quote(" a.state_code = ?s", $state_code);
+    if ($avail_only) {
+        $condition .= db_quote(" AND a.status = ?s", 'A');
+    }
+
+    return db_get_hash_single_array("SELECT a.code, b.name as district FROM ?:districts as a LEFT JOIN ?:district_descriptions as b ON b.district_id = a.district_id AND b.lang_code = ?s WHERE ?p ORDER BY b.name", array('code', 'district'), $lang_code, $condition);
+}
+
+/**
  * Gets all states
  *
  * @param bool $avail_only if set to true - gets only enabled states
@@ -248,6 +356,34 @@ function fn_get_all_states($avail_only = true, $lang_code = CART_LANGUAGE)
     $avail_cond = ($avail_only == true) ? " WHERE a.status = 'A' " : '';
 
     return db_get_hash_multi_array("SELECT a.country_code, a.code, b.state FROM ?:states as a LEFT JOIN ?:state_descriptions as b ON b.state_id = a.state_id AND b.lang_code = ?s $avail_cond ORDER BY a.country_code, b.state", array('country_code'), $lang_code);
+}
+
+/**
+ * Gets all districts
+ *
+ * @param bool $avail_only if set to true - gets only enabled districts
+ * @param string $lang_code language code
+ * @return array multi key-value array with country code as key and array with state code and name as value
+ */
+function fn_get_all_districts($avail_only = true, $lang_code = CART_LANGUAGE)
+{
+    $avail_cond = ($avail_only == true) ? " WHERE a.status = 'A' " : '';
+
+    return db_get_hash_multi_array("SELECT a.state_code, a.code, b.name as district FROM ?:districts as a LEFT JOIN ?:district_descriptions as b ON b.district_id = a.district_id AND b.lang_code = ?s $avail_cond ORDER BY a.country_code, b.name", array('state_code'), $lang_code);
+}
+
+/**
+ * Gets all wards
+ *
+ * @param bool $avail_only if set to true - gets only enabled wards
+ * @param string $lang_code language code
+ * @return array multi key-value array with country code as key and array with ward code and name as value
+ */
+function fn_get_all_wards($avail_only = true, $lang_code = CART_LANGUAGE)
+{
+    $avail_cond = ($avail_only == true) ? " WHERE a.status = 'A' " : '';
+
+    return db_get_hash_multi_array("SELECT a.district_code, a.code, b.name as ward FROM ?:wards as a LEFT JOIN ?:ward_descriptions as b ON b.ward_id = a.ward_id AND b.lang_code = ?s $avail_cond ORDER BY a.district_code, b.name", array('district_code'), $lang_code);
 }
 
 // Get state name (results are cached)
@@ -430,6 +566,7 @@ function fn_get_available_destination($location)
     $state = !empty($location['state']) ? $location['state'] : '';
     $zipcode = !empty($location['zipcode']) ? $location['zipcode'] : '';
     $city = !empty($location['city']) ? $location['city'] : '';
+    $district = !empty($location['district']) ? $location['district'] : '';
     $address = !empty($location['address']) ? $location['address'] : '';
 
     if (!empty($country)) {
@@ -489,7 +626,7 @@ function fn_get_available_destination($location)
                 }
                 // Check city
                 if ($elm_type == 'T') {
-                    $suitable = fn_check_element($elms, $city, true);
+                    $suitable = fn_check_element($elms, $district);
                     if ($suitable == false) {
                         break;
                     }
@@ -831,15 +968,10 @@ function fn_update_destination($data, $destination_id, $lang_code = DESCR_SL)
         }
     }
 
-    if (!empty($data['cities'])) {
-        $cities = explode("\n", $data['cities']);
+    if (!empty($data['districts'])) {
         $_data['element_type'] = 'T';
-        foreach ($cities as $key => $value) {
-            $value = trim($value);
-            if (!empty($value)) {
-                $_data['element'] = $value;
-                db_query("INSERT INTO ?:destination_elements ?e", $_data);
-            }
+        foreach ($data['districts'] as $key => $_data['element']) {
+            db_query("INSERT INTO ?:destination_elements ?e", $_data);
         }
     }
 
@@ -882,6 +1014,24 @@ function fn_destination_get_states($lang_code)
     }
 
     return $states;
+
+}
+
+/**
+ * Gets districts destination
+ *
+ * @param string $lang_code language code
+ * @return array $districts districts destination
+ */
+function fn_destination_get_districts($lang_code)
+{
+    list($_districts) = fn_get_districts_paging(array(), 0, $lang_code);
+    $districts = array();
+    foreach ($_districts as $_district) {
+        $districts[$_district['district_id']] = $_district['country'] . ': ' . $_district['state'] . ': ' . $_district['district'];
+    }
+
+    return $districts;
 
 }
 

@@ -595,6 +595,8 @@ function fn_suppliers_shippings_group_products_list(&$products, &$groups)
                     'city' => $supplier_data['city'],
                     'country' => $supplier_data['country'],
                     'state' => $supplier_data['state'],
+                    'district' => $supplier_data['district'],
+                    'ward' => $supplier_data['ward'],
                     'zipcode' => $supplier_data['zipcode'],
                     'phone' => $supplier_data['phone'],
                     'fax' => $supplier_data['fax'],

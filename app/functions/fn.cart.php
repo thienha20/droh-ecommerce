@@ -4214,7 +4214,14 @@ function fn_calculate_cart_content(
                     ) {
                         $rate['price'] = 0;
                     }
-                    if (!empty($product_groups[$group_key]['shippings'][$shipping_id]['rate_info'])) {
+                    if ($product_groups[$group_key]['shippings'][$shipping_id]['service_code'] == 'GHN'
+                        && $rate['price'] !== false
+                    ) {
+                        $product_groups[$group_key]['shippings'][$shipping_id]['rate_info']['rate_value'] = $rate['price'];
+                        $product_groups[$group_key]['shippings'][$shipping_id]['rate_info']['delivery_time'] =  $product_groups[$group_key]['shippings'][$shipping_id]['delivery_time'];
+                        $product_groups[$group_key]['shippings'][$shipping_id]['rate_info']['base_rate'] =  $rate['price'];
+                        $product_groups[$group_key]['shippings'][$shipping_id]['rate'] = $rate['price'];
+                    } elseif(!empty($product_groups[$group_key]['shippings'][$shipping_id]['rate_info'])){
                         if ($rate['price'] !== false) {
                             $rate['price'] += !empty($package_info['shipping_freight'])
                                 ? $package_info['shipping_freight']
@@ -4854,6 +4861,8 @@ function fn_get_customer_location($auth, $cart, $billing = false)
             $prefix . 'country' => Registry::get('settings.Checkout.default_country'),
             $prefix . 'state'   => Registry::get('settings.Checkout.default_state'),
             $prefix . 'city'    => Registry::get('settings.Checkout.default_city'),
+            $prefix . 'district'=> Registry::get('settings.Checkout.default_district'),
+            $prefix . 'ward'=> Registry::get('settings.Checkout.default_ward')
         ];
 
         if (!isset($u_info[$prefix . 'zipcode'])
@@ -4896,6 +4905,20 @@ function fn_get_customer_location($auth, $cart, $billing = false)
             $avail_state = db_get_field("SELECT COUNT(*) FROM ?:states WHERE country_code = ?s AND code = ?s AND status = 'A'", $s_info['country'], $s_info['state']);
             if (empty($avail_state)) {
                 $s_info['state'] = '';
+            }
+        }
+
+        if (!empty($s_info['district'])) {
+            $avail_district = db_get_field("SELECT COUNT(*) FROM ?:districts WHERE state_code = ?s AND code = ?s AND status = 'A'", $s_info['state'], $s_info['district']);
+            if (empty($avail_district)) {
+                $s_info['district'] = '';
+            }
+        }
+
+        if (!empty($s_info['ward'])) {
+            $avail_ward = db_get_field("SELECT COUNT(*) FROM ?:wards WHERE district_code = ?s AND code = ?s AND status = 'A'", $s_info['district'], $s_info['ward']);
+            if (empty($avail_ward)) {
+                $s_info['ward'] = '';
             }
         }
     }
@@ -8294,6 +8317,14 @@ function fn_get_shipments_info($params, $items_per_page = 0)
     return array($shipments, $params);
 }
 
+function fn_get_shipment_by_tracking_number($tracking_number){
+    $shipment = db_get_row(
+        "SELECT DISTINCT a.*, b.order_id FROM ?:shipments a LEFT JOIN ?:shipment_items b ON b.shipment_id = a.shipment_id WHERE tracking_number = ?s",
+        $tracking_number
+    );
+    return $shipment;
+}
+
 /**
  * Verification that at least one product was chosen.
  *
@@ -8503,6 +8534,15 @@ function fn_update_shipment($shipment_data, $shipment_id = 0, $group_key = 0, $a
 
     }
 
+    return $shipment_id;
+}
+
+function fn_update_tracking_number_for_shipment($shipment_id = 0, $tracking_number = ''){
+    $arow = db_query("UPDATE ?:shipments SET tracking_number = ?s WHERE shipment_id = ?i", $tracking_number, $shipment_id);
+    if ($arow === false) {
+        fn_set_notification('E', __('error'), __('object_not_found', array('[object]' => __('shipment'))),'','404');
+        $shipment_id = false;
+    }
     return $shipment_id;
 }
 

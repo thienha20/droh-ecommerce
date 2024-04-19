@@ -1756,6 +1756,10 @@ msgctxt "Languages::carrier_usps"
 msgid "USPS"
 msgstr "USPS"
 
+msgctxt "Languages::carrier_ghn"
+msgid "GHN"
+msgstr "GHN"
+
 msgctxt "Languages::cart"
 msgid "Cart"
 msgstr "Cart"
@@ -9025,6 +9029,18 @@ msgctxt "Languages::select_country"
 msgid "Select country"
 msgstr "Select country"
 
+msgctxt "Languages::select_state"
+msgid "Chọn Tỉnh Thành"
+msgstr "Chọn Tỉnh Thành"
+
+msgctxt "Languages::select_district"
+msgid "Chọn Quận/Huyện"
+msgstr "Chọn Quận/Huyện"
+
+msgctxt "Languages::select_ward"
+msgid "Chọn Phường/Xã"
+msgstr "Chọn Phường/Xã"
+
 msgctxt "Languages::select_customer"
 msgid "Select customer"
 msgstr "Select customer"
@@ -9432,6 +9448,10 @@ msgstr "Package length"
 msgctxt "Languages::ship_dhl_site_id"
 msgid "Site ID"
 msgstr "Site ID"
+
+msgctxt "Languages::ship_ghn_shop_id"
+msgid "Shop ID"
+msgstr "Shop ID"
 
 msgctxt "Languages::ship_dhl_width"
 msgid "Package width"
@@ -11402,8 +11422,8 @@ msgid "No shipments found"
 msgstr "No shipments found"
 
 msgctxt "Languages::text_no_shipping_methods"
-msgid "Sorry, it seems that we have no shipping options available for your location.<br/>Please check your shipping address and contact us if everything is okay. We'll see what we can do about it."
-msgstr "Sorry, it seems that we have no shipping options available for your location.<br/>Please check your shipping address and contact us if everything is okay. We'll see what we can do about it."
+msgid "Vui lòng chọn địa chỉ nhận hàng của bạn và sau đó chọn phương thức chuyển hàng"
+msgstr "Vui lòng chọn địa chỉ nhận hàng của bạn và sau đó chọn phương thức chuyển hàng"
 
 msgctxt "Languages::text_no_upgrades_available"
 msgid "No upgrades currently available"
@@ -19779,8 +19799,8 @@ msgid "Deliver to:"
 msgstr "Deliver to:"
 
 msgctxt "Languages::lite_checkout.click_here_to_update_shipping"
-msgid "Enter city and state and click here to update shipping rates"
-msgstr "Enter city and state and click here to update shipping rates"
+msgid "Nhập vào khu vực nhận hàng của bạn và nhấn chuột tại đây để cập nhật giá vận chuyển."
+msgstr "Nhập vào khu vực nhận hàng của bạn và nhấn chuột tại đây để cập nhật giá vận chuyển."
 
 msgctxt "Languages::lite_checkout.shipping_method_for"
 msgid "Shipping method for [group_name]"

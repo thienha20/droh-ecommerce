@@ -72,59 +72,15 @@
                     class_name="destination-states"
                 }
 
-                {* Zipcodes list *}
-                {include file="common/subheader.tpl" title=__("zipcodes")}
-                <div class="table-wrapper">
-                    <table width="100%">
-                    <tr>
-                        <td width="48%">
-                            <textarea name="destination_data[zipcodes]"
-                                      id="elm_destination_zipcodes"
-                                      rows="8"
-                                      class="input-full"
-                            >{$destination_data.zipcodes}</textarea>
-                        </td>
-                        <td>&nbsp;</td>
-                        <td width="48%">{__("text_zipcodes_wildcards")}</td>
-                    </tr>
-                    </table>
-                </div>
-
-                {* Cities list *}
-                {include file="common/subheader.tpl" title=__("cities")}
-                <div class="table-wrapper">
-                    <table cellpadding="0" cellspacing="0" width="100%" border="0">
-                    <tr>
-                        <td width="48%">
-                            <textarea name="destination_data[cities]"
-                                      id="elm_destination_cities"
-                                      rows="8"
-                                      class="input-full"
-                            >{$destination_data.cities}</textarea>
-                        </td>
-                        <td>&nbsp;</td>
-                        <td width="48%">{__("text_cities_wildcards")}</td>
-                    </tr>
-                    </table>
-                </div>
-
-                {* Addresses list *}
-                {include file="common/subheader.tpl" title=__("addresses")}
-                <div class="table-wrapper">
-                    <table cellpadding="0" cellspacing="0" width="100%" border="0">
-                    <tr>
-                        <td width="48%">
-                            <textarea name="destination_data[addresses]"
-                                      id="elm_destination_cities"
-                                      rows="8"
-                                      class="input-full"
-                            >{$destination_data.addresses}</textarea>
-                        </td>
-                        <td>&nbsp;</td>
-                        <td width="48%">{__("text_addresses_wildcards")}</td>
-                    </tr>
-                    </table>
-                </div>
+                {* districts list *}
+                {include file="common/double_selectboxes.tpl"
+                    title=__("districts")
+                    first_name="destination_data[districts]"
+                    first_data=$destination_data.districts
+                    second_name="all_districts"
+                    second_data=$districts
+                    class_name="destination-districts"
+                }
             </div>
 
             {hook name="destinations:tabs_content"}{/hook}
