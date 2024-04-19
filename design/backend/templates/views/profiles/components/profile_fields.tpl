@@ -138,7 +138,7 @@
         {if $field.field_name == "v_district"}
             {$_state = $company_data.state}
             {$_district = $company_data.district}
-            <select class="cm-district">
+            <select class="cm-district" name="company_data[district]">
                 {if $districts && $districts.$_state}
                     <option value="">- {__("select_district")} -</option>
                     {foreach from=$districts.$_state item=district}
@@ -149,7 +149,7 @@
         {elseif $field.field_name == 'v_ward'}
             {$_district = $company_data.district}
             {$_ward = $company_data.ward}
-            <select class="cm-ward">
+            <select class="cm-ward" name="company_data[ward]">
                 {if $wards && $wards.$_district}
                     <option value="">- {__("select_ward")} -</option>
                     {foreach from=$wards.$_district item=ward}
